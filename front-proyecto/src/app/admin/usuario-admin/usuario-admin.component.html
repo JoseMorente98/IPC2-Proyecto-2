@@ -1,0 +1,307 @@
+<!-- ### $App Screen Content ### -->
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Administradores</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalAdd">
+          <span class="icon-holder">
+            <i class="ti-plus"></i>
+          </span>  Agregar
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo Electrónico</th>
+                    <th>Tipo de Usuario</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.idUsuario}}</td>
+                    <td>{{data.nombre}}</td>
+                    <td>{{data.apellido}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.tipo}}</td>
+                    <td style="text-align: center">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-outline-success" data-toggle="modal" [disabled]="data.idTipoUsuario==1"
+                      data-target="#exampleModalUpdate" (click)="getSingle(data.idUsuario)">
+                        <span class="icon-holder">
+                          <i class="ti-pencil"></i>
+                        </span>  Editar
+                      </button>
+                      <button type="button" class="btn btn-outline-danger" (click)="delete(data.idUsuario)" [disabled]="data.idTipoUsuario==1">
+                        <span class="icon-holder">
+                          <i class="ti-trash"></i>
+                        </span>  Eliminar
+                      </button>
+                    </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL AGREGAR USUARIO -->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
+  <form class="modal-dialog" role="document" [formGroup]="formData" (ngSubmit)="saveChanges()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalAddLabel">Agregar Administrador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="text-normal text-dark">Nombre</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" name="nombre" required>
+          </div>     
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="nombre.errors.required">
+                El nombre es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="nombre.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div>  
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Apellido</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido" name="apellido" required>
+          </div>
+          <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="apellido.errors.required">
+                El apellido es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="apellido.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div> 
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Correo Electronico</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-lock"></i>
+                </span>
+              </div>
+            </div>
+            <input type="email" class="form-control" placeholder="Usuario" formControlName="email" name="email" required>
+          </div>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="email.errors.required">
+                El email es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="email.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="email.errors.email">
+                No es un correo valido
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Contraseña</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-lock"></i>
+                </span>
+              </div>
+            </div>
+            <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" name="password" required>
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="password.errors.required">
+                La contraseña es requerida
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="password.errors.maxlength">
+                La longitud maxima es de 16 caracteres
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="password.errors.minlength">
+                La longitud minima es de 8 caracteres
+              </div>
+          </div>
+        </div>              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+          <span class="icon-holder">
+            <i class="ti-close"></i>
+          </span>  Cerrar
+        </button>
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!formData.valid">
+          <span class="icon-holder">
+            <i class="ti-save-alt"></i>
+          </span>  Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- MODAL EDITAR USUARIO -->
+<div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalUpdateLabel" aria-hidden="true">
+  <form class="modal-dialog" role="document" [formGroup]="formData" (ngSubmit)="saveChanges2()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalUpdateLabel">Editar Administrador</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="text-normal text-dark">Nombre</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre" name="nombre" required>
+          </div>     
+          <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="nombre.errors.required">
+                El nombre es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="nombre.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div>  
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Apellido</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Apellido" formControlName="apellido" name="apellido" required>
+          </div>
+          <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="apellido.errors.required">
+                El apellido es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="apellido.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div> 
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Correo Electronico</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-lock"></i>
+                </span>
+              </div>
+            </div>
+            <input type="email" class="form-control" placeholder="Usuario" formControlName="email" name="email" required>
+          </div>
+          <div *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="email.errors.required">
+                El email es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="email.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="email.errors.email">
+                No es un correo valido
+              </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Contraseña</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-lock"></i>
+                </span>
+              </div>
+            </div>
+            <input type="password" class="form-control" placeholder="Contraseña" formControlName="password" name="password" required>
+          </div>
+          <div *ngIf="password.invalid && (password.dirty || password.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="password.errors.required">
+                La contraseña es requerida
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="password.errors.maxlength">
+                La longitud maxima es de 16 caracteres
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="password.errors.minlength">
+                La longitud minima es de 8 caracteres
+              </div>
+          </div>
+        </div>              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+          <span class="icon-holder">
+            <i class="ti-close"></i>
+          </span>  Cerrar
+        </button>
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!formData.valid">
+          <span class="icon-holder">
+            <i class="ti-save-alt"></i>
+          </span>  Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>
