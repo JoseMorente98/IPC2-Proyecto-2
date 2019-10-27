@@ -1,0 +1,423 @@
+<!-- ### $App Screen Content ### -->
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Preguntas</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModalAdd">
+          <span class="icon-holder">
+            <i class="ti-plus"></i>
+          </span>  Agregar
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Pregunta</th>
+                    <th>Opciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.idPregunta}}</td>
+                    <td>{{data.tipoPregunta}}</td>
+                    <td>{{data.pregunta}}</td>
+                    <td style="text-align: center">
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-outline-success" data-toggle="modal" [disabled]="data.idTipoUsuario==1"
+                      data-target="#exampleModalUpdate" (click)="getSingle(data.idPregunta)">
+                        <span class="icon-holder">
+                          <i class="ti-pencil"></i>
+                        </span>  Editar
+                      </button>
+                      <button type="button" class="btn btn-outline-danger" (click)="delete(data.idPregunta)" [disabled]="data.idTipoUsuario==1">
+                        <span class="icon-holder">
+                          <i class="ti-trash"></i>
+                        </span>  Eliminar
+                      </button>
+                    </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- MODAL AGREGAR USUARIO -->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
+  <form class="modal-dialog" role="document" [formGroup]="formData" (ngSubmit)="saveChanges()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalAddLabel">Agregar Pregunta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="text-normal text-dark">Tipo Pregunta</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <select class="form-control" id="inlineFormInputGroup" placeholder="Tipo de Pregunta" formControlName="tipoPregunta" name="tipoPregunta" >
+              <option value="Respuesta Multiple">Respuesta Multiple</option>
+              <option value="Falso/Verdadero">Falso/Verdadero</option>
+            </select>
+          </div>  
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Pregunta</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Pregunta" formControlName="pregunta" name="pregunta" required>
+          </div>     
+          <div *ngIf="pregunta.invalid && (pregunta.dirty || pregunta.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="pregunta.errors.required">
+                El pregunta es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="pregunta.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div>  
+        </div>
+        <div *ngIf="formData.value.tipoPregunta=='Respuesta Multiple'">
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 1</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 1" formControlName="respuesta1" name="respuesta1" required>
+            </div>     
+            <div *ngIf="respuesta1.invalid && (respuesta1.dirty || respuesta1.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta1.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 2</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 2" formControlName="respuesta2" name="respuesta2" required>
+            </div>     
+            <div *ngIf="respuesta2.invalid && (respuesta2.dirty || respuesta2.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta2.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 3</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 3" formControlName="respuesta3" name="respuesta3" required>
+            </div>     
+            <div *ngIf="respuesta3.invalid && (respuesta3.dirty || respuesta3.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta3.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+          <label class="text-normal text-dark">Respuesta Correcta</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Pregunta" formControlName="correcta" name="correcta" required>
+            </div>     
+            <div *ngIf="correcta.invalid && (correcta.dirty || correcta.touched)">
+                <div class="alert alert-danger" role="alert" *ngIf="correcta.errors.required">
+                  El correcta es requerido
+                </div>
+                <div class="alert alert-warning" role="alert" *ngIf="correcta.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+        </div>
+        <div *ngIf="formData.value.tipoPregunta=='Falso/Verdadero'">
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta Correcta</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <select class="form-control" id="inlineFormInputGroup" placeholder="Respuesta Correcta" formControlName="correcta" name="correcta" >
+                <option value="Falso">Falso</option>
+                <option value="Verdadero">Verdadero</option>
+              </select>
+            </div>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Punteo</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Punteo" formControlName="punteo" name="punteo" required>
+          </div>     
+          <div *ngIf="punteo.invalid && (punteo.dirty || punteo.touched)">
+              <div class="alert alert-warning" role="alert" *ngIf="punteo.errors.maxlength">
+                La longitud maxima es de 3 caracteres
+              </div>
+          </div>  
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+          <span class="icon-holder">
+            <i class="ti-close"></i>
+          </span>  Cerrar
+        </button>
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!formData.valid">
+          <span class="icon-holder">
+            <i class="ti-save-alt"></i>
+          </span>  Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- MODAL AGREGAR USUARIO -->
+<div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
+  <form class="modal-dialog" role="document" [formGroup]="formData" (ngSubmit)="saveChanges2()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalAddLabel">Editar Pregunta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="text-normal text-dark">Tipo Pregunta</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <select class="form-control" id="inlineFormInputGroup" placeholder="Tipo de Pregunta" formControlName="tipoPregunta" name="tipoPregunta" >
+              <option value="Respuesta Multiple">Respuesta Multiple</option>
+              <option value="Falso/Verdadero">Falso/Verdadero</option>
+            </select>
+          </div>  
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Pregunta</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Pregunta" formControlName="pregunta" name="pregunta" required>
+          </div>     
+          <div *ngIf="pregunta.invalid && (pregunta.dirty || pregunta.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="pregunta.errors.required">
+                El pregunta es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="pregunta.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div>  
+        </div>
+        <div *ngIf="formData.value.tipoPregunta=='Respuesta Multiple'">
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 1</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 1" formControlName="respuesta1" name="respuesta1" required>
+            </div>     
+            <div *ngIf="respuesta1.invalid && (respuesta1.dirty || respuesta1.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta1.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 2</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 2" formControlName="respuesta2" name="respuesta2" required>
+            </div>     
+            <div *ngIf="respuesta2.invalid && (respuesta2.dirty || respuesta2.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta2.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta No. 3</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Respuesta No. 3" formControlName="respuesta3" name="respuesta3" required>
+            </div>     
+            <div *ngIf="respuesta3.invalid && (respuesta3.dirty || respuesta3.touched)">
+                <div class="alert alert-warning" role="alert" *ngIf="respuesta3.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+          <div class="form-group">
+          <label class="text-normal text-dark">Respuesta Correcta</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" placeholder="Pregunta" formControlName="correcta" name="correcta" required>
+            </div>     
+            <div *ngIf="correcta.invalid && (correcta.dirty || correcta.touched)">
+                <div class="alert alert-danger" role="alert" *ngIf="correcta.errors.required">
+                  El correcta es requerido
+                </div>
+                <div class="alert alert-warning" role="alert" *ngIf="correcta.errors.maxlength">
+                  La longitud maxima es de 100 caracteres
+                </div>
+            </div>  
+          </div>
+        </div>
+        <div *ngIf="formData.value.tipoPregunta=='Falso/Verdadero'">
+          <div class="form-group">
+            <label class="text-normal text-dark">Respuesta Correcta</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-info-alt"></i>
+                  </span>
+                </div>
+              </div>
+              <select class="form-control" id="inlineFormInputGroup" placeholder="Respuesta Correcta" formControlName="correcta" name="correcta" >
+                <option value="Falso">Falso</option>
+                <option value="Verdadero">Verdadero</option>
+              </select>
+            </div>  
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-normal text-dark">Punteo</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Punteo" formControlName="punteo" name="punteo" required>
+          </div>     
+          <div *ngIf="punteo.invalid && (punteo.dirty || punteo.touched)">
+              <div class="alert alert-warning" role="alert" *ngIf="punteo.errors.maxlength">
+                La longitud maxima es de 3 caracteres
+              </div>
+          </div>  
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
+          <span class="icon-holder">
+            <i class="ti-close"></i>
+          </span>  Cerrar
+        </button>
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!formData.valid">
+          <span class="icon-holder">
+            <i class="ti-save-alt"></i>
+          </span>  Guardar Cambios
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<simple-notifications [options]="options"></simple-notifications>

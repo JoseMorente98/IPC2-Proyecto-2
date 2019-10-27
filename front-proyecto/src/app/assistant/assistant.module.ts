@@ -12,7 +12,7 @@ import { ForoAssistantComponent } from './foro-assistant/foro-assistant.componen
 import { ForoDetailAssistantComponent } from './foro-detail-assistant/foro-detail-assistant.component';
 import { ActividadAssistantComponent } from './actividad-assistant/actividad-assistant.component';
 import { EvaluacionAssistantComponent } from './evaluacion-assistant/evaluacion-assistant.component';
-import { EvaluacionDetalleAssistantComponent } from './evaluacion-detalle-assistant/evaluacion-detalle-assistant.component';
+import { EvDetAssistantComponent } from './ev-det-assistant/ev-det-assistant.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { EvaluacionDetalleAssistantComponent } from './evaluacion-detalle-assist
     ForoDetailAssistantComponent,
     ActividadAssistantComponent,
     EvaluacionAssistantComponent,
-    EvaluacionDetalleAssistantComponent
+    EvDetAssistantComponent
   ],
   imports: [
     CommonModule,

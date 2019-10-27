@@ -13,7 +13,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { TicketStudentComponent } from './ticket-student/ticket-student.component';
 import { EvaluacionStudentComponent } from './evaluacion-student/evaluacion-student.component';
-import { EvaluacionDetalleStudentComponent } from './evaluacion-detalle-student/evaluacion-detalle-student.component';
+import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.component';
 
 
 
@@ -25,7 +25,10 @@ import { EvaluacionDetalleStudentComponent } from './evaluacion-detalle-student/
     MisCursosStudentComponent, 
     MensajeStudentComponent, 
     ForoStudentComponent, 
-    ForoDetailStudentComponent, TicketStudentComponent, EvaluacionStudentComponent, EvaluacionDetalleStudentComponent
+    ForoDetailStudentComponent, 
+    TicketStudentComponent,
+    EvaluacionStudentComponent, 
+    DetEvaStudentComponent
   ],
   imports: [
     CommonModule,

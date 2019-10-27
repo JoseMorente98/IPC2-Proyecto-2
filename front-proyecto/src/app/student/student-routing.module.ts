@@ -9,7 +9,7 @@ import { ForoDetailStudentComponent } from './foro-detail-student/foro-detail-st
 import { CursosStudentComponent } from './cursos-student/cursos-student.component';
 import { TicketStudentComponent } from './ticket-student/ticket-student.component';
 import { EvaluacionStudentComponent } from './evaluacion-student/evaluacion-student.component';
-import { EvaluacionDetalleStudentComponent } from './evaluacion-detalle-student/evaluacion-detalle-student.component';
+import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -22,7 +22,7 @@ const routes: Routes = [
     { path: 'foro/:id', component: ForoStudentComponent},
     { path: 'foro/detail/:id', component: ForoDetailStudentComponent},
     { path: 'evaluacion/:id', component: EvaluacionStudentComponent},
-    { path: 'evaluacion/detail/:id', component: EvaluacionDetalleStudentComponent},
+    { path: 'evaluacion/detail/:id', component: DetEvaStudentComponent},
     /*{ path: 'producto', component: ProductoAdminComponent, canActivate: [AuthGuard] },
     { path: 'proveedor', component: ProveedorAdminComponent, canActivate: [AuthGuard] },
     { path: 'usuario', component: UsuarioAdminComponent, canActivate: [AuthGuard] },
