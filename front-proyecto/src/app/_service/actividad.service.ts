@@ -58,6 +58,15 @@ export class ActividadService {
   }
 
   //CREATE
+  public createEntrega(data:any) : Observable<any> {
+    let url = `${this.basePath}actividad/entregar`;
+    return this.http.post(url, data, this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  //CREATE
   public update(data:any) : Observable<any> {
     let url = `${this.basePath}actividad/${data.id}`;
     return this.http.put(url, data, this.httpOptions)

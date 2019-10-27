@@ -78,6 +78,31 @@ var ActividadController = /** @class */ (function () {
                 }
             });
         };
+        this.createEntrega = function (req, res) {
+            var query = "\n            CALL SP_EntregarActividad(?, ?, ?, ?);\n        ";
+            var body = {
+                texto: req.body.texto,
+                idUsuario: req.body.idUsuario,
+                idActividad: req.body.idActividad,
+                archivo: req.body.archivo
+            };
+            mysql_1.default.sendQuery(query, [body.texto, body.idUsuario, body.idActividad, body.archivo], function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json({
+                        ok: true,
+                        status: 200,
+                        data: data[0]
+                    });
+                }
+            });
+        };
         this.update = function (req, res) {
             var query = "\n            UPDATE Actividad SET idDetalleCurso = ?, nombre = ?, fechaLimite = ?, ponderacion = ?, estado = ?\n            WHERE idActividad = ?;\n        ";
             var body = {

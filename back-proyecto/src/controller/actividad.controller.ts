@@ -100,6 +100,37 @@ export default class ActividadController {
         })
     }
 
+    createEntrega = (req: Request, res: Response) => {
+        const query = `
+            CALL SP_EntregarActividad(?, ?, ?, ?);
+        `;
+
+        let body = {
+            texto: req.body.texto,
+            idUsuario: req.body.idUsuario,
+            idActividad: req.body.idActividad,
+            archivo: req.body.archivo
+        }
+        
+        MySQL.sendQuery(query, 
+            [body.texto, body.idUsuario, body.idActividad, body.archivo], 
+            (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json({
+                    ok: true,
+                    status: 200,
+                    data: data[0]
+                })
+            }
+        })
+    }
+
     update = (req: Request, res: Response) => {
         const query = `
             UPDATE Actividad SET idDetalleCurso = ?, nombre = ?, fechaLimite = ?, ponderacion = ?, estado = ?

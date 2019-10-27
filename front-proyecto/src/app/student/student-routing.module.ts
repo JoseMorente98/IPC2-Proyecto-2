@@ -10,6 +10,8 @@ import { CursosStudentComponent } from './cursos-student/cursos-student.componen
 import { TicketStudentComponent } from './ticket-student/ticket-student.component';
 import { EvaluacionStudentComponent } from './evaluacion-student/evaluacion-student.component';
 import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.component';
+import { ActividadStudentComponent } from './actividad-student/actividad-student.component';
+import { DetailAcStudentComponent } from './detail-ac-student/detail-ac-student.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -20,6 +22,8 @@ const routes: Routes = [
     { path: 'mensaje', component: MensajeStudentComponent},
     { path: 'ticket', component: TicketStudentComponent},
     { path: 'foro/:id', component: ForoStudentComponent},
+    { path: 'actividad/:id', component: ActividadStudentComponent},
+    { path: 'actividad/detail/:id', component: DetailAcStudentComponent},
     { path: 'foro/detail/:id', component: ForoDetailStudentComponent},
     { path: 'evaluacion/:id', component: EvaluacionStudentComponent},
     { path: 'evaluacion/detail/:id', component: DetEvaStudentComponent},

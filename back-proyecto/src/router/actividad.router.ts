@@ -6,6 +6,7 @@ actividad.get('/actividad', UsuarioController.getInstance().getAll);
 actividad.get('/actividad/:id', UsuarioController.getInstance().getSingle);
 actividad.get('/actividad/curso/:id', UsuarioController.getInstance().getAllByAsignacion);
 actividad.post('/actividad', UsuarioController.getInstance().create);
+actividad.post('/actividad/entregar', UsuarioController.getInstance().createEntrega);
 actividad.put('/actividad/:id', UsuarioController.getInstance().update);
 actividad.delete('/actividad/:id', UsuarioController.getInstance().delete);
 

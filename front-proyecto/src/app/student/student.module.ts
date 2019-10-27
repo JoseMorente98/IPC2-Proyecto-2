@@ -14,6 +14,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { TicketStudentComponent } from './ticket-student/ticket-student.component';
 import { EvaluacionStudentComponent } from './evaluacion-student/evaluacion-student.component';
 import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.component';
+import { ActividadStudentComponent } from './actividad-student/actividad-student.component';
+import { DetailAcStudentComponent } from './detail-ac-student/detail-ac-student.component';
 
 
 
@@ -28,7 +30,7 @@ import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.compon
     ForoDetailStudentComponent, 
     TicketStudentComponent,
     EvaluacionStudentComponent, 
-    DetEvaStudentComponent
+    DetEvaStudentComponent, ActividadStudentComponent, DetailAcStudentComponent
   ],
   imports: [
     CommonModule,

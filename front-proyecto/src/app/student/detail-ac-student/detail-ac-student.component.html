@@ -1,0 +1,43 @@
+<form class="content" role="document" [formGroup]="formData" (ngSubmit)="saveChanges()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalAddLabel">Agregar Tarea</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="text-normal text-dark">Texto</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="icon-holder">
+                  <i class="ti-info-alt"></i>
+                </span>
+              </div>
+            </div>
+            <input type="text" class="form-control" placeholder="texto" formControlName="texto" name="texto" required>
+          </div>     
+          <div *ngIf="texto.invalid && (texto.dirty || texto.touched)">
+              <div class="alert alert-danger" role="alert" *ngIf="texto.errors.required">
+                El texto es requerido
+              </div>
+              <div class="alert alert-warning" role="alert" *ngIf="texto.errors.maxlength">
+                La longitud maxima es de 100 caracteres
+              </div>
+          </div>  
+        </div>
+                   
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-primary" [disabled]="!formData.valid">
+          <span class="icon-holder">
+            <i class="ti-save-alt"></i>
+          </span>  Enviar Tarea
+        </button>
+      </div>
+    </div>
+</form>
+
+<simple-notifications [options]="options"></simple-notifications>

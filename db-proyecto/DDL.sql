@@ -178,6 +178,8 @@ CREATE TABLE ActividadAlumno(
     idActividad INT NOT NULL,
     idUsuario INT NOT NULL,
     entregada INT NOT NULL,
+	texto VARCHAR(250) NOT NULL,
+    NOTA INT NULL,
     archivo BLOB NULL,
 	FOREIGN KEY (idActividad) REFERENCES Actividad(idActividad)
 	ON UPDATE CASCADE
@@ -466,6 +468,25 @@ BEGIN
         ORDER BY RAND();
 	ELSE
 		SELECT * FROM Pregunta WHERE idEvaluacion = _idEvaluacion;
+	END IF;
+END;
+$$
+
+-- CREAR HILO FORO
+DELIMITER $$
+CREATE PROCEDURE SP_EntregarActividad
+(IN _texto VARCHAR(250), _idUsuario INT, _idActividad INT, _archivo BLOB)
+BEGIN
+	DECLARE _fechaFin DATETIME;
+    DECLARE _tiempo INT;
+	SET _fechaFin = (SELECT fechaFin FROM Actividad WHERE idActividad = _idActividad);
+	IF(_fechaFin > NOW()) THEN
+		INSERT INTO ActividadAlumno(texto, idUsuario, idActividad, archivo, entregada, nota) VALUES (_texto, _idUsuario, _idActividad, _archivo, 1, 0);
+		SET _tiempo = 0;
+		SELECT _tiempo;
+	ELSE
+		SET _tiempo = 1;
+		SELECT _tiempo;
 	END IF;
 END;
 $$
