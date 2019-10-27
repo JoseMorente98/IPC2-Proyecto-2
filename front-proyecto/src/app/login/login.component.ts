@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
           case 2:
             if(res.length > 1) {
               //DASHBOARD COMPARTIDO
+              this.router.navigate(['intermedio']);
             } else {
               //AUX
               this.router.navigate(['auxiliar']);

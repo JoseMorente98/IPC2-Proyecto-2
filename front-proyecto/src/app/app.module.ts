@@ -12,13 +12,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //PAQUETES EXTERNOS
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { IntermedioComponent } from './intermedio/intermedio.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    IntermedioComponent
   ],
   imports: [
     BrowserModule,
