@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql_1 = __importDefault(require("./../mysql/mysql"));
+var nodemailer = require('nodemailer');
 var UsuarioController = /** @class */ (function () {
     function UsuarioController() {
         this.getAll = function (req, res) {
@@ -158,6 +159,65 @@ var UsuarioController = /** @class */ (function () {
                         ok: true,
                         status: 200,
                     });
+                }
+            });
+        };
+        this.recoveryPassword = function (req, res) {
+            var data1 = {
+                email: req.body.email
+            };
+            var query = "\n            CALL SP_RecoveryPassword(?);\n        ";
+            mysql_1.default.sendQuery(query, [data1.email], function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    //console.log(JSON.parse(JSON.stringify(data[0])))
+                    var dataQuery = JSON.parse(JSON.stringify(data[0]));
+                    //console.log("QUERY ",dataQuery[0])
+                    if (dataQuery[0]._existe == '0') {
+                        res.status(400).json({
+                            ok: false,
+                            status: 400
+                        });
+                    }
+                    else {
+                        var transporter = nodemailer.createTransport({
+                            service: 'Gmail',
+                            auth: {
+                                user: 'josemorenteg98@gmail.com',
+                                pass: 'rvliefzecigjpgjw'
+                            }
+                        });
+                        transporter.sendMail({
+                            from: '"Administrador USAC" <josemorenteg98@gmail.com>',
+                            to: 'josemorenteg98@gmail.com',
+                            subject: 'Recuperación de Contraseña',
+                            text: 'Recuperación de Contraseña',
+                            html: "\n                        <body style=\"font-family: Arial;\">\n                        <div style=\"text-align: center;\">\n                            <h1>Hola " + JSON.parse(JSON.stringify(data[0]))[0].nombre + " " + JSON.parse(JSON.stringify(data[0]))[0].apellido + "</h1>\n                            <p>Recientemente hemos recibido una solicitud para cambiar tu contrase\u00F1a. Tu correo es:</p>\n                            <p style=\"background-color: #4CAF50;\n                            border: none;\n                            color: white;\n                            padding: 15px 32px;\n                            text-align: center;\n                            text-decoration: none;\n                            display: inline-block;\n                            font-size: 16px;\">" + JSON.parse(JSON.stringify(data[0]))[0].email + "</p>\n                            <p>Tu nueva contrase\u00F1a es:</p>\n                            <p style=\"background-color: #4CAF50; \n                            border: none;\n                            color: white;\n                            padding: 15px 32px;\n                            text-align: center;\n                            text-decoration: none;\n                            display: inline-block;\n                            font-size: 16px;\">usac12345</p>            \n                        </div>\n                        </body>"
+                        }, function (error, info) {
+                            if (error) {
+                                console.log(error);
+                                res.json({
+                                    ok: false,
+                                    status: 500,
+                                    err: error
+                                });
+                            }
+                            else {
+                                console.log("Correo Enviado :D");
+                                res.json({
+                                    ok: false,
+                                    status: 200,
+                                    data: info
+                                });
+                            }
+                        });
+                    }
                 }
             });
         };

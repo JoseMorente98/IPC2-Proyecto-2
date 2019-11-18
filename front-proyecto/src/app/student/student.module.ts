@@ -16,6 +16,7 @@ import { EvaluacionStudentComponent } from './evaluacion-student/evaluacion-stud
 import { DetEvaStudentComponent } from './det-eva-student/det-eva-student.component';
 import { ActividadStudentComponent } from './actividad-student/actividad-student.component';
 import { DetailAcStudentComponent } from './detail-ac-student/detail-ac-student.component';
+import { NotasComponent } from './notas/notas.component';
 
 
 
@@ -30,7 +31,7 @@ import { DetailAcStudentComponent } from './detail-ac-student/detail-ac-student.
     ForoDetailStudentComponent, 
     TicketStudentComponent,
     EvaluacionStudentComponent, 
-    DetEvaStudentComponent, ActividadStudentComponent, DetailAcStudentComponent
+    DetEvaStudentComponent, ActividadStudentComponent, DetailAcStudentComponent, NotasComponent
   ],
   imports: [
     CommonModule,

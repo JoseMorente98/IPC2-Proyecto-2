@@ -17,6 +17,7 @@ declare var $:any;
   styleUrls: ['./detail-curso-admin.component.scss']
 })
 export class DetailCursoAdminComponent implements OnInit {
+  search:any;
   formData:FormGroup;
   formAssignament:FormGroup;
   parameter:any;

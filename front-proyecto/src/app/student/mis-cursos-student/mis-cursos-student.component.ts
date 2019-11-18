@@ -12,6 +12,7 @@ declare var $:any;
   styleUrls: ['./mis-cursos-student.component.scss']
 })
 export class MisCursosStudentComponent implements OnInit {
+  search:any;
   table:any[];
   public options = {
     position: ["bottom", "right"],

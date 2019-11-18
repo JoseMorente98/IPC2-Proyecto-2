@@ -7,6 +7,7 @@ var express_1 = require("express");
 var usuario_controller_1 = __importDefault(require("./../controller/usuario.controller"));
 var usuario = express_1.Router();
 usuario.post('/auth', usuario_controller_1.default.getInstance().auth);
+usuario.post('/recovery', usuario_controller_1.default.getInstance().recoveryPassword);
 usuario.get('/usuario', usuario_controller_1.default.getInstance().getAll);
 usuario.get('/usuario/admin', usuario_controller_1.default.getInstance().getAllAdmin);
 usuario.get('/usuario/auxiliar', usuario_controller_1.default.getInstance().getAllAuxiliar);

@@ -16,6 +16,7 @@ declare var $:any;
 export class TicketStudentComponent implements OnInit {
   formData:FormGroup;
   parameter:any;
+  search:any;
   table:any[];
   data = {
     id: 0,

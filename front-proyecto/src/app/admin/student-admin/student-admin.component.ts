@@ -14,6 +14,7 @@ declare var $:any;
 })
 export class StudentAdminComponent implements OnInit {
   formData:FormGroup;
+  search:any;
   parameter:any;
   table:any[];
   data = {

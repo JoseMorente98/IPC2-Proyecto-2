@@ -42,8 +42,8 @@
                     <td>{{data.nombre}}</td>
                     <td>{{data.ponderacion}}</td>
                     <td>{{data.fechaLimite | date: 'short'}}</td>
-                    <td *ngIf="data.estado=='0'">Deshabilitado</td>
-                    <td *ngIf="data.estado=='1'">Habilitado</td>
+                    <td *ngIf="data.estado=='0'">Texto</td>
+                    <td *ngIf="data.estado=='1'">Texto/Archivo</td>
                     <td style="text-align: center">
                       <div class="btn-group" role="group" aria-label="Basic example">
                       <button type="button" class="btn btn-outline-success" data-toggle="modal" [disabled]="data.idTipoUsuario==1"
@@ -151,8 +151,8 @@
               </div>
             </div>
             <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="estado" name="estado" >
-              <option value="0">Deshabilitado</option>
-              <option value="1">Habilitado</option>
+              <option value="0">Texto</option>
+              <option value="1">Texto/Archivo</option>
             </select>
           </div>     
           <div *ngIf="estado.invalid && (estado.dirty || estado.touched)">
@@ -260,8 +260,8 @@
               </div>
             </div>
             <select class="form-control" id="inlineFormInputGroup" placeholder="Estado" formControlName="estado" name="estado" >
-              <option value="0">Deshabilitado</option>
-              <option value="1">Habilitado</option>
+              <option value="0">Texto</option>
+              <option value="1">Texto/Archivo</option>
             </select>
           </div>     
           <div *ngIf="estado.invalid && (estado.dirty || estado.touched)">

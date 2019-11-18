@@ -1,0 +1,46 @@
+<!-- ### $App Screen Content ### -->
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Mis Notas</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Actividad</th>
+                    <th>Ponderación</th>
+                    <th>Nota</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.idActividad}}</td>
+                    <td>{{data.nombre}}</td>
+                    <td>{{data.ponderacion}}</td>
+                    <td>{{data.NOTA}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

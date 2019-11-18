@@ -13,6 +13,8 @@ export class MensajeAssistantComponent implements OnInit {
   table:any[] = [];
   table2:any[] = [];
   formData:FormGroup;
+  search:any;
+  search2:any;
   mensajes:any[] = [];
   selectData:any;
   usuarioID:number = +localStorage.getItem('currentId');

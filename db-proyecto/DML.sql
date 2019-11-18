@@ -10,7 +10,7 @@ INSERT INTO TipoUsuario(nombre, descripcion) VALUES ('Estudiante', 'Estudiante d
 INSERT INTO Usuario(carnet, dpi, email, password, nombre, apellido) VALUES (null, null, "admin@usac.com", "12345", "Administrador", "U");
 CALL SP_AsignarRol(1, 1);
 
---INSERTAR SECCION
+-- INSERTAR SECCION
 INSERT INTO Seccion (nombre) VALUES ('A');
 INSERT INTO Seccion (nombre) VALUES ('B');
 INSERT INTO Seccion (nombre) VALUES ('C');

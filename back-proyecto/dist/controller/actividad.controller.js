@@ -53,6 +53,43 @@ var ActividadController = /** @class */ (function () {
                 }
             });
         };
+        this.getEnvioTarea = function (req, res) {
+            var query = "\n            SELECT * FROM fase2.actividadalumno WHERE idActividad = ? AND idUsuario = ?;\n        ";
+            var body = {
+                idActividad: req.params.id,
+                idUsuario: req.params.id2
+            };
+            mysql_1.default.sendQuery(query, [body.idActividad, body.idUsuario], function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json(data[0]);
+                }
+            });
+        };
+        this.getNotas = function (req, res) {
+            var query = "\n            SELECT * FROM fase2.actividadalumno \n            INNER JOIN Actividad ON actividadalumno.idActividad = Actividad.idActividad\n            WHERE idUsuario = ?;\n        ";
+            var body = {
+                idUsuario: req.params.id
+            };
+            mysql_1.default.sendQuery(query, body.idUsuario, function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json(data);
+                }
+            });
+        };
         this.create = function (req, res) {
             var query = "\n            INSERT INTO Actividad(idDetalleCurso, nombre, fechaLimite, ponderacion, estado) VALUES(?, ?, ?, ?, ?)\n        ";
             var body = {

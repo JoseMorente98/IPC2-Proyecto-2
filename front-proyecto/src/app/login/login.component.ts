@@ -10,6 +10,7 @@ import { AuthService } from '../_service/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  search:any;
   formData:FormGroup;
 
   public options = {

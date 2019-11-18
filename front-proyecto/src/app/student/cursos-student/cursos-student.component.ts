@@ -10,6 +10,7 @@ import { CursoDetalleService } from 'src/app/_service/curso-detalle.service';
   styleUrls: ['./cursos-student.component.scss']
 })
 export class CursosStudentComponent implements OnInit {
+  search:any;
   table:any[];
   public options = {
     position: ["bottom", "right"],

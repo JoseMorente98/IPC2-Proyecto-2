@@ -15,6 +15,7 @@ declare var $:any;
 export class ForoStudentComponent implements OnInit {
   formData:FormGroup;
   parameter:any;
+  search:any;
   table:any[];
   public options = {
     position: ["bottom", "right"],

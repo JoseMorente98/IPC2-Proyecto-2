@@ -13,7 +13,18 @@ declare var $:any;
 export class ForoDetailStudentComponent implements OnInit {
   table:any[];
   formData:FormGroup;
-
+  search:any;
+  public options = {
+    position: ["bottom", "right"],
+    timeOut: 2000,
+    showProgressBar: false,
+    pauseOnHover: true,
+    clickToClose: true,
+    lastOnBottom: false,
+    preventDuplicates: true,
+    animate: "scale",
+    maxLength: 400
+  };
   constructor(
     private activatedRoute: ActivatedRoute,
     private foroService: ForoService,

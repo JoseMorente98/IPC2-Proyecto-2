@@ -9,6 +9,7 @@ import { ForoService } from 'src/app/_service/foro.service';
 })
 export class ForoDetailAssistantComponent implements OnInit {
   table:any[];
+  search:any;
 
   constructor(
     private activatedRoute: ActivatedRoute,

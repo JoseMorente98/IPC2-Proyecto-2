@@ -15,6 +15,7 @@ declare var $:any;
 })
 export class TicketAdminComponent implements OnInit {
   formData:FormGroup;
+  search:any;
   parameter:any;
   table:any[];
   data = {

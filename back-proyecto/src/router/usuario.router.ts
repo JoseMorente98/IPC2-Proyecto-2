@@ -3,6 +3,7 @@ import UsuarioController from "./../controller/usuario.controller"
 const usuario = Router();
 
 usuario.post('/auth', UsuarioController.getInstance().auth);
+usuario.post('/recovery', UsuarioController.getInstance().recoveryPassword);
 usuario.get('/usuario', UsuarioController.getInstance().getAll);
 usuario.get('/usuario/admin', UsuarioController.getInstance().getAllAdmin);
 usuario.get('/usuario/auxiliar', UsuarioController.getInstance().getAllAuxiliar);

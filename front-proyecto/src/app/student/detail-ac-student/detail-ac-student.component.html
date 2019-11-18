@@ -29,8 +29,8 @@
               </div>
           </div>  
         </div>
-        <div class="pos-r">
-            <div class="custom-file">
+        <div class="pos-r" *ngIf="data">
+            <div class="custom-file" *ngIf="data.estado==1">
             <input type="file" class="custom-file-input" id="customFileLang" lang="es" formControlName="archivo" name="archivo">
             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
             </div>
@@ -44,6 +44,14 @@
         </button>
       </div>
     </div>
-</form>
+</form><br><br>
+
+<div class="card" *ngIf="tarea">
+  <div class="card-body">
+    <h5 class="card-title">Tarea Entregada</h5>
+    <p class="card-text">{{tarea.texto}}</p>
+    <button class="btn btn-primary">Calificación: {{tarea.NOTA}}</button>
+  </div>
+</div>
 </main>
 <simple-notifications [options]="options"></simple-notifications>

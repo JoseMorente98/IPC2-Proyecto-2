@@ -11,6 +11,8 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class DetailAcStudentComponent implements OnInit {
   formData:FormGroup;
+  data:any;
+  tarea:any;
   public options = {
     position: ["bottom", "right"],
     timeOut: 2000,
@@ -31,6 +33,8 @@ export class DetailAcStudentComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.snapshot.paramMap.get('id');
+    this.getSingle(+this.activatedRoute.snapshot.paramMap.get('id'))
+    this.getTarea(+this.activatedRoute.snapshot.paramMap.get('id'))
     this.initializeForm();
   }
 
@@ -59,6 +63,7 @@ export class DetailAcStudentComponent implements OnInit {
       console.log(res)
       if(res.data[0]._tiempo==0) {
         this.notificationsService.success('Exito :D', 'Tarea enviada con exito');
+        this.getTarea(+this.activatedRoute.snapshot.paramMap.get('id'))
       } else {
         this.notificationsService.warn('Alerta D:', 'Ya no puedes enviar tarea se ha cerrado la asignacion.');
       }
@@ -70,6 +75,25 @@ export class DetailAcStudentComponent implements OnInit {
     })
   }
 
+  getSingle(id:any) {
+    this.actividadService.getSingle(id)
+    .subscribe((res) => {
+      console.log(res)
+      this.data = res;
+    }, (error) => {
+      console.log(error);
+    })
+  }
 
+
+  getTarea(id:any) {
+    this.actividadService.getTarea(id, +localStorage.getItem('currentId'))
+    .subscribe((res) => {
+      console.log(res)
+      this.tarea = res;
+    }, (error) => {
+      console.log(error);
+    })
+  }
 
 }

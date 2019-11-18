@@ -16,6 +16,7 @@ export class AuxiliarAdminComponent implements OnInit {
   formData:FormGroup;
   parameter:any;
   table:any[];
+  search:any;
   data = {
     id: 0,
     nombre: '',

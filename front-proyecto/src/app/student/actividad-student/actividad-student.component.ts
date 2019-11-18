@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ActividadService } from 'src/app/_service/actividad.service';
 
@@ -15,6 +15,7 @@ declare var $:any;
 export class ActividadStudentComponent implements OnInit {
   formData:FormGroup;
   parameter:any;
+  search:any;
   table:any[];
   data = {
     id: 0,
@@ -40,6 +41,7 @@ export class ActividadStudentComponent implements OnInit {
   }
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private actividadService: ActividadService,
     private notificationsService: NotificationsService
@@ -152,5 +154,9 @@ export class ActividadStudentComponent implements OnInit {
   get idDetalleCurso() { return this.formData.get('idDetalleCurso'); }
   get estado() { return this.formData.get('estado'); }
   get id() { return this.formData.get('id'); }
+
+  getNotas() {
+    this.router.navigate(['/estudiante/notas'])
+  }
   
 }

@@ -21,6 +21,7 @@ export class AsignacionCursoAdminComponent implements OnInit {
   formDataDelete:FormGroup;
   formAssignament:FormGroup;
   parameter:any;
+  search:any;
   table:any[];
   secciones:any[];
   cursos:any[];

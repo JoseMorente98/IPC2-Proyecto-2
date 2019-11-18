@@ -10,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
+  search:any;
   formData:FormGroup;
   public options = {
     position: ["bottom", "right"],

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import MySQL from "./../mysql/mysql";
+const nodemailer = require('nodemailer');
 
 export default class UsuarioController {
     private static _instance: UsuarioController;
@@ -222,5 +223,93 @@ export default class UsuarioController {
                 })
             }
         })
+    }
+
+    recoveryPassword = (req: Request, res: Response) => {
+        let data1 = {
+            email: req.body.email
+        }
+    
+        const query = `
+            CALL SP_RecoveryPassword(?);
+        `;
+
+        MySQL.sendQuery(query, [data1.email],
+            (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                //console.log(JSON.parse(JSON.stringify(data[0])))
+                let dataQuery = JSON.parse(JSON.stringify(data[0]))
+                //console.log("QUERY ",dataQuery[0])
+                if(dataQuery[0]._existe == '0') {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400
+                    });
+                } else {
+                    let transporter = nodemailer.createTransport({
+                        service: 'Gmail',
+                        auth: {
+                            user: 'josemorenteg98@gmail.com',
+                            pass: 'rvliefzecigjpgjw'
+                        }
+                    });
+
+                    transporter.sendMail({
+                        from: '"Administrador USAC" <josemorenteg98@gmail.com>', // sender address
+                        to: 'josemorenteg98@gmail.com', // list of receivers
+                        subject: 'Recuperación de Contraseña', // Subject line
+                        text: 'Recuperación de Contraseña', // plain text body
+                        html: `
+                        <body style="font-family: Arial;">
+                        <div style="text-align: center;">
+                            <h1>Hola ${JSON.parse(JSON.stringify(data[0]))[0].nombre} ${JSON.parse(JSON.stringify(data[0]))[0].apellido}</h1>
+                            <p>Recientemente hemos recibido una solicitud para cambiar tu contraseña. Tu correo es:</p>
+                            <p style="background-color: #4CAF50;
+                            border: none;
+                            color: white;
+                            padding: 15px 32px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;">${JSON.parse(JSON.stringify(data[0]))[0].email}</p>
+                            <p>Tu nueva contraseña es:</p>
+                            <p style="background-color: #4CAF50; 
+                            border: none;
+                            color: white;
+                            padding: 15px 32px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;">usac12345</p>            
+                        </div>
+                        </body>`
+                    }, (error:any, info:any) => {
+                        if (error){
+                            console.log(error);
+                            res.json({
+                                ok: false,
+                                status: 500,
+                                err: error
+                            })
+                        } else {
+                            console.log("Correo Enviado :D");
+                            res.json({
+                                ok: false,
+                                status: 200,
+                                data: info
+                            })
+                        }
+                    });
+                }
+                
+            }
+        })
+
     }
 }

@@ -12,7 +12,7 @@ export default class MySQL {
             host     : 'localhost',
             user     : 'root',
             password : '1234',
-            database : 'proyecto1'
+            database : 'Fase2'
         });
         this.conectarDB();
     }

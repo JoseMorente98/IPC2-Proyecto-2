@@ -69,6 +69,53 @@ export default class ActividadController {
         })
     }
 
+    getEnvioTarea = (req: Request, res: Response) => {
+        const query = `
+            SELECT * FROM fase2.actividadalumno WHERE idActividad = ? AND idUsuario = ?;
+        `;
+
+        let body = {
+            idActividad : req.params.id,
+            idUsuario : req.params.id2
+        }
+
+        MySQL.sendQuery(query, [body.idActividad, body.idUsuario], (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json(data[0])
+            }
+        })
+    }
+
+    getNotas = (req: Request, res: Response) => {
+        const query = `
+            SELECT * FROM fase2.actividadalumno 
+            INNER JOIN Actividad ON actividadalumno.idActividad = Actividad.idActividad
+            WHERE idUsuario = ?;
+        `;
+
+        let body = {
+            idUsuario : req.params.id
+        }
+
+        MySQL.sendQuery(query, body.idUsuario, (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json(data)
+            }
+        })
+    }
+
     create = (req: Request, res: Response) => {
         const query = `
             INSERT INTO Actividad(idDetalleCurso, nombre, fechaLimite, ponderacion, estado) VALUES(?, ?, ?, ?, ?)
