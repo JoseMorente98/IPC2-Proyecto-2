@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mis Cursos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToRoute('auxiliar/mensaje-auxiliar')">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let data of table |filter:search">
+    <img src="https://www.forocuenca.com/wp-content/uploads/2015/12/ImagenInicioClasesApoyo.jpg">
+    <ion-card-header>
+      <ion-card-title>{{data.codigo}} - {{data.curso}}</ion-card-title>
+      <ion-card-subtitle>Sección {{data.seccion}}</ion-card-subtitle>
+      <ion-card-subtitle>Año {{data.anio}}</ion-card-subtitle>
+      <ion-card-subtitle>{{data.semestre}}</ion-card-subtitle>
+      <div style="text-align: center;">
+      <ion-button fill="clear" color="danger" (click)="getLink('auxiliar/asistencia-auxiliar/'+data.idDetalleCurso, data.estado)">
+        <ion-icon name="notepad" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="getLink('auxiliar/actividad-auxiliar/'+data.idDetalleCurso, data.estado)">
+        <ion-icon name="ruler-alt" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="getLink('auxiliar/evaluacion-auxiliar/'+data.idDetalleCurso, data.estado)">
+        <ion-icon name="help" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="getLink('auxiliar/foro-auxiliar/'+data.idDetalleCurso, data.estado)">
+        <ion-icon name="email" slot="icon-only"></ion-icon>
+      </ion-button>
+      </div>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

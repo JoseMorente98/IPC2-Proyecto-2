@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Envíar Actividad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form padding (ngSubmit)="saveChanges()">
+    <ion-item>
+      <ion-label position="floating"><ion-icon name="person"></ion-icon>  Comentario</ion-label>
+      <ion-textarea rows="6" cols="20" [(ngModel)]="formData.texto" maxlength="250" name="texto" placeholder="Ingresa tu comentario..."></ion-textarea>
+    </ion-item>
+    <div *ngIf="data">
+    <ion-item *ngIf="data.estado==1">
+      <ion-label position="floating"><ion-icon name="person"></ion-icon>  Archivo</ion-label>
+      <ion-input type="file" [(ngModel)]="formData.archivo" name="archivo"></ion-input>
+    </ion-item>
+  </div>
+    <ion-button color="primary" expand="block" fill="outline" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Envíar Tarea
+    </ion-button>
+  </form>
+
+  <ion-card *ngIf="tarea">
+    <ion-card-header>
+      <ion-card-subtitle>Calificación: {{tarea.NOTA}}</ion-card-subtitle>
+      <ion-card-title>Tarea Entregada</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{tarea.texto}}
+    </ion-card-content>
+  </ion-card> 
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Foro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="width: 100%; height: 250px;">
+    <div class="container">
+      <img class="img-center" src="https://aulavirtual.usac.edu.gt/g/logo.png">
+    </div>
+  </div>
+  <form padding (ngSubmit)="saveChanges()">
+    <ion-item>
+      <ion-label position="floating"><ion-icon name="person"></ion-icon>  Comentario</ion-label>
+      <ion-textarea rows="6" cols="20" m [(ngModel)]="data.comentario" maxlength="250" name="comentario" placeholder="Ingresa tu comentario de foro..."></ion-textarea>
+    </ion-item>
+    <ion-button color="primary" expand="block" fill="outline" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Guardar Cambios
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,10 +1,17 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Mis Cursos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToRoute('estudiante/mensaje-estudiante')">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-searchbar [(ngModel)]="search"></ion-searchbar>
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
@@ -15,10 +22,20 @@
       <ion-card-subtitle>Sección {{data.seccion}}</ion-card-subtitle>
       <ion-card-subtitle>Año {{data.anio}}</ion-card-subtitle>
       <ion-card-subtitle>{{data.semestre}}</ion-card-subtitle>
-      <ion-button expand="block" fill="clear" color="danger" (click)="delete(data.idDetalleCurso, data.idAsignacionEstudiante)">
-        <ion-icon name="trash" slot="start"></ion-icon>
-        Desasignarme
+      <div style="text-align: center;">
+      <ion-button fill="clear" color="danger" (click)="delete(data.idDetalleCurso, data.idAsignacionEstudiante)">
+        <ion-icon name="trasher" slot="icon-only"></ion-icon>
       </ion-button>
+      <ion-button fill="clear" color="danger" (click)="goToRoute('estudiante/actividad-estudiante/'+data.idDetalleCurso)">
+        <ion-icon name="ruler-alt" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="goToRoute('estudiante/evaluacion-estudiante/'+data.idDetalleCurso)">
+        <ion-icon name="help" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="goToRoute('estudiante/foro-estudiante/'+data.idDetalleCurso)">
+        <ion-icon name="email" slot="icon-only"></ion-icon>
+      </ion-button>
+      </div>
     </ion-card-header>
   </ion-card>
 </ion-content>

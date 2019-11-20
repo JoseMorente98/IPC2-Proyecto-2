@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Evaluaciones</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+  <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="evaluacion">
+      <ion-label>Evaluaciones</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="calificacion">
+      <ion-label>Calificaciones</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content *ngIf="selectItem=='evaluacion'">
+  <ion-card *ngFor="let data of table |filter:search">
+    <img src="https://www.compartirpalabramaestra.org/sites/default/files/styles/articulos/public/field/image/examenes-del-icfes-un-proceso-de-investigacion-permanente.jpg?itok=jXRKWXnY">
+    <ion-card-header>
+      <ion-card-title>{{data.nombre}}</ion-card-title>
+      <ion-card-subtitle>Punteo: {{data.punteo}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
+        <ion-fab-button color="secondary" (click)="goEvaluacion(data.idEvaluacion, data.habilitar)">
+          <ion-icon name="list-box"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+  </ion-card>
+</ion-content>
+
+<ion-content *ngIf="selectItem=='calificacion'">
+  <ion-card *ngFor="let data of table |filter:search">
+    <img src="https://www.compartirpalabramaestra.org/sites/default/files/styles/articulos/public/field/image/examenes-del-icfes-un-proceso-de-investigacion-permanente.jpg?itok=jXRKWXnY">
+    <ion-card-header>
+      <ion-card-title>{{data.nombre}}</ion-card-title>
+      <ion-card-subtitle>Punteo: {{data.punteo}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
+        <ion-fab-button color="success">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+  </ion-card>
+</ion-content>

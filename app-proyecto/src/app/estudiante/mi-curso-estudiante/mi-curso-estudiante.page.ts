@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AsignacionEstudianteService } from 'src/app/_service/asignacion-estudiante.service';
 import { NotificacionService } from 'src/app/_service/notificacion.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mi-curso-estudiante',
@@ -13,11 +15,21 @@ export class MiCursoEstudiantePage implements OnInit {
   
   constructor(
     private asignacionStudentService: AsignacionEstudianteService,
-    private notificationsService: NotificacionService
+    private notificationsService: NotificacionService,
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit() {
     this.getAll()
+  }
+
+  goToRoute(route:string) {
+    this.router.navigate([`${route}`])
+  }
+
+  goToBack() {
+    this.location.back();
   }
 
   getAll() {

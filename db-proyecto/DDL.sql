@@ -477,9 +477,11 @@ CREATE PROCEDURE SP_EntregarActividad
 (IN _texto VARCHAR(250), _idUsuario INT, _idActividad INT, _archivo BLOB)
 BEGIN
 	DECLARE _fechaFin DATETIME;
+	DECLARE _fechaFin2 DATETIME;
     DECLARE _tiempo INT;
 	SET _fechaFin = (SELECT fechaLimite FROM Actividad WHERE idActividad = _idActividad);
-	IF(_fechaFin > NOW()) THEN
+	SET _fechaFin2 = SELECT NOW();
+	IF(_fechaFin > _fechaFin2) THEN
 		CALL SP_AgregarTarea(_texto, _idUsuario, _idActividad, _archivo);
 		SET _tiempo = 0;
 		SELECT _tiempo;

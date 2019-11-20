@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Actividades</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let data of table |filter:search">
+    <ion-card  *ngIf="data.idDetalleCurso==parameter">
+      <img src="https://www.catalunyapress.es/multimedia/images/nioconmuchastareas.jpg">
+      <ion-card-header>
+        <ion-card-title>{{data.nombre}}</ion-card-title>
+        <ion-card-subtitle>{{data.fechaLimite | date: 'mediumDate'}}</ion-card-subtitle>
+        <ion-card-subtitle>Punteo: {{data.ponderacion}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
+          <ion-fab-button color="secondary" (click)="goToRoute('estudiante/actividad-d-estudiante/'+data.idActividad)">
+            <ion-icon name="document"></ion-icon>
+          </ion-fab-button>
+      </ion-fab>
+    </ion-card>
+  </div>
+</ion-content>

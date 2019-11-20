@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AsignacionEstudianteService } from 'src/app/_service/asignacion-estudiante.service';
 import { CursoDetalleService } from 'src/app/_service/curso-detalle.service';
 import { NotificacionService } from 'src/app/_service/notificacion.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-curso-estudiante',
@@ -15,11 +16,15 @@ export class CursoEstudiantePage implements OnInit {
   constructor(
     private asignacionStudentService: AsignacionEstudianteService,
     private cursoDetalleService: CursoDetalleService,
+    private router: Router,
     private notificationsService: NotificacionService
   ) { }
 
   ngOnInit() {
     this.getAll()
+  }
+  goToRoute(route:string) {
+    this.router.navigate([`${route}`])
   }
 
   getAll() {

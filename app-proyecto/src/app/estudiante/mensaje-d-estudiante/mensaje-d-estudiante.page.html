@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" >
+      <ion-icon name="arrow-back" slot="icon-only" (click)="goToBack()"></ion-icon>
+    </ion-buttons>
+    <ion-title >
+      Mensajes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="msg_history">
+    <div *ngFor="let item of mensajes">
+      <div>
+        <div class="incoming_msg" *ngIf="item.idUsuario1!=usuarioId">
+          <div class="received_msg">
+            <div class="received_withd_msg">
+              <p>Asunto: {{item.Asunto}}</p>
+              <p>Cuerpo: {{item.Cuerpo}}</p>
+              <span class="time_date">Leído</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="outgoing_msg" *ngIf="item.idUsuario1==usuarioId">
+          <div class="sent_msg">
+            <p>Asunto: {{item.Asunto}}</p>
+            <p>Cuerpo: {{item.Cuerpo}}</p>
+            <span class="time_date">Leído</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="type_msg">
+    <div class="input_msg_write">
+      <ion-item color="transparent">
+        <ion-input  maxlength="255" type="text" [(ngModel)]="data.asunto" name="asunto" placeholder="Escribir Asunto"></ion-input>
+      </ion-item>
+      <ion-item color="transparent">
+        <ion-input  maxlength="255" type="text" [(ngModel)]="data.mensaje" name="mensaje" placeholder="Escribir Mensaje"></ion-input>
+      </ion-item>
+      <button class="msg_send_btn" type="button" (click)="saveChanges()">      
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </div>
+  </div>
+</ion-footer>

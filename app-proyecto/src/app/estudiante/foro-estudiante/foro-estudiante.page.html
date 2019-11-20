@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Foros</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let data of table |filter:search" (click)="goToRoute('estudiante/foro-d-estudiante/'+data.idForo)">
+    <img src="https://www.redem.org/wp-content/uploads/2016/04/profesor-universitario.jpg">
+    <ion-card-header>
+      <ion-card-title>{{data.titulo}}</ion-card-title>
+      <ion-card-subtitle>{{data.fecha | date: 'mediumDate'}} {{data.hora}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
+        <ion-fab-button color="secondary">
+          <ion-icon name="chatboxes"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+  </ion-card>
+</ion-content>

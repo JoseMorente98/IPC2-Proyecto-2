@@ -19,6 +19,7 @@ var ticket_router_1 = __importDefault(require("./router/ticket.router"));
 var actividad_router_1 = __importDefault(require("./router/actividad.router"));
 var evaluacion_router_1 = __importDefault(require("./router/evaluacion.router"));
 var pregunta_router_1 = __importDefault(require("./router/pregunta.router"));
+var respuesta_router_1 = __importDefault(require("./router/respuesta.router"));
 var server = server_1.default.init(3000);
 var api = "/api/";
 mysql_1.default.getInstance();
@@ -57,6 +58,7 @@ server.app.use(api, asignacion_estudiante_router_1.default);
 server.app.use(api, ticket_router_1.default);
 server.app.use(api, evaluacion_router_1.default);
 server.app.use(api, pregunta_router_1.default);
+server.app.use(api, respuesta_router_1.default);
 server.start(function () {
     console.log("Servidor corriendo en el puerto 3000 :D");
 });

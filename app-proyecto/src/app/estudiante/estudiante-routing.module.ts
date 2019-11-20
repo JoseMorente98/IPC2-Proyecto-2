@@ -28,6 +28,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'ticket-estudiante',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./ticket-estudiante/ticket-estudiante.module').then( m => m.TicketEstudiantePageModule)
+          }
+        ]
+      },
       /*{
         path: 'promocion',
         children: [
@@ -69,6 +79,38 @@ const routes: Routes = [
     path: '',
     redirectTo: '/estudiante/curso-estudiante',
     pathMatch: 'full'
+  },
+  {
+    path: 'actividad-estudiante/:id',
+    loadChildren: () => import('./actividad-estudiante/actividad-estudiante.module').then( m => m.ActividadEstudiantePageModule)
+  },
+  {
+    path: 'foro-estudiante/:id',
+    loadChildren: () => import('./foro-estudiante/foro-estudiante.module').then( m => m.ForoEstudiantePageModule)
+  },
+  {
+    path: 'evaluacion-estudiante/:id',
+    loadChildren: () => import('./evaluacion-estudiante/evaluacion-estudiante.module').then( m => m.EvaluacionEstudiantePageModule)
+  },
+  {
+    path: 'foro-d-estudiante/:id',
+    loadChildren: () => import('./foro-d-estudiante/foro-d-estudiante.module').then( m => m.ForoDEstudiantePageModule)
+  },
+  {
+    path: 'mensaje-estudiante',
+    loadChildren: () => import('./mensaje-estudiante/mensaje-estudiante.module').then( m => m.MensajeEstudiantePageModule)
+  },
+  {
+    path: 'mensaje-d-estudiante/:id',
+    loadChildren: () => import('./mensaje-d-estudiante/mensaje-d-estudiante.module').then( m => m.MensajeDEstudiantePageModule)
+  },
+  {
+    path: 'evaluacion-d-estudiante/:id',
+    loadChildren: () => import('./evaluacion-d-estudiante/evaluacion-d-estudiante.module').then( m => m.EvaluacionDEstudiantePageModule)
+  },
+  {
+    path: 'actividad-d-estudiante/:id',
+    loadChildren: () => import('./actividad-d-estudiante/actividad-d-estudiante.module').then( m => m.ActividadDEstudiantePageModule)
   },
 ];
 

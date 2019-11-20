@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Mis Tickets</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToRoute('estudiante/mensaje-estudiante')">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let data of table |filter:search">
+    <ion-card-header>
+      <ion-card-title>{{data.asunto}}</ion-card-title>
+      <ion-card-subtitle *ngIf="data.estado==0">Enviado</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="data.estado==1">Recibido</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="data.estado==2">En Proceso</ion-card-subtitle>
+      <ion-card-subtitle *ngIf="data.estado==3">Finalizado</ion-card-subtitle>
+      <ion-card-content>
+        {{data.mensaje}}
+      </ion-card-content>
+      <div style="text-align: center;">
+      <ion-button fill="clear" color="danger" (click)="delete(data.idTicket)">
+        <ion-icon name="trasher" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="secondary" (click)="presentModal(data.idTicket)">
+        <ion-icon name="create" slot="icon-only"></ion-icon>
+      </ion-button>
+      </div>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

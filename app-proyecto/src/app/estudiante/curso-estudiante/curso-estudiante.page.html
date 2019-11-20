@@ -1,6 +1,18 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    <ion-button (click)="goToRoute('login')">
+      <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      <!--<p>Back</p>-->
+    </ion-button>
+    </ion-buttons>
     <ion-title>Cursos</ion-title>
+    <ion-buttons slot="end">
+    <ion-button (click)="goToRoute('estudiante/mensaje-estudiante')">
+      <ion-icon slot="icon-only" name="send"></ion-icon>
+      <!--<p>Back</p>-->
+    </ion-button>
+  </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="primary">
     <ion-searchbar [(ngModel)]="search"></ion-searchbar>
