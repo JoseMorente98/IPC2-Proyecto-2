@@ -12,6 +12,8 @@ import { TicketAdminComponent } from './ticket-admin/ticket-admin.component';
 import { ConAsignacionComponent } from './con-asignacion/con-asignacion.component';
 import { Reporte2Component } from './reporte2/reporte2.component';
 import { Reporte6Component } from './reporte6/reporte6.component';
+import { Reporte3Component } from './reporte3/reporte3.component';
+import { Reporte5Component } from './reporte5/reporte5.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -26,6 +28,8 @@ const routes: Routes = [
     { path: 'detalle-curso/auxiliar/:id', component: DetailCursoAdminComponent},
     { path: 'reporte1', component: ConAsignacionComponent},
     { path: 'reporte2', component: Reporte2Component},
+    { path: 'reporte3', component: Reporte3Component},
+    { path: 'reporte5', component: Reporte5Component},
     { path: 'reporte6', component: Reporte6Component},
     /*{ path: 'producto', component: ProductoAdminComponent, canActivate: [AuthGuard] },
     { path: 'proveedor', component: ProveedorAdminComponent, canActivate: [AuthGuard] },

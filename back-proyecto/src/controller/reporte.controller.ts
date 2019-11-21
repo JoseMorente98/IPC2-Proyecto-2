@@ -160,16 +160,24 @@ export default class ReporteController {
 
     getReporte6 = (req: Request, res: Response) => {
         const query = `
-            SELECT Usuario.nombre,Usuario.apellido, titulo, descripcion, imagen, video FROM fase2.publicacion
+            SELECT COUNT(*) as cantidad, Publicacion.titulo, Publicacion.descripcion, Publicacion.imagen, Publicacion.video, Publicacion.idPublicacion,
+            Usuario.nombre, Usuario.apellido FROM fase2.megusta
+            INNER JOIN Publicacion ON megusta.idPublicacion = publicacion.idPublicacion
+            INNER JOIN Usuario ON Publicacion.idUsuario = Usuario.idUsuario
+            WHERE Usuario.idUsuario = ?
+            UNION ALL
+            SELECT 0 as cantidad, titulo, descripcion, imagen, video, idPublicacion, Usuario.nombre, Usuario.apellido FROM fase2.publicacion
             INNER JOIN Usuario ON publicacion.idUsuario = Usuario.idUsuario
             WHERE Usuario.idUsuario = ?
+            GROUP BY idPublicacion;
         `;
 
         let body = {
-            idUsuario : req.body.idUsuario
+            idUsuario : req.body.idUsuario,
+            idUsuario2 : req.body.idUsuario,
         }
 
-        MySQL.sendQuery(query, [body.idUsuario], (err:any, data:Object[]) => {
+        MySQL.sendQuery(query, [body.idUsuario, body.idUsuario2], (err:any, data:Object[]) => {
             if(err) {
                 res.status(400).json({
                     ok: false,

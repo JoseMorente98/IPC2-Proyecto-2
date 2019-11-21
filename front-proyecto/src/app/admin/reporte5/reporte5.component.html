@@ -1,1 +1,64 @@
-<p>reporte5 works!</p>
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Reporte 5</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+        <form>
+            <div class="row">
+              <div class="col">
+                <label for="inputState">Usuario</label>
+                <select id="inputState" class="form-control" [(ngModel)]="data.idUsuario" name="idUsuario">
+                  <option value="">Seleccionar Usuario</option>
+                  <option *ngFor="let x of usuarios" value="{{x.idUsuario}}">{{x.nombre}} {{x.apellido}}</option>
+                </select>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline-primary" (click)="consultar()">
+              <span class="icon-holder">
+                <i class="ti-plus"></i>
+              </span>  Filtrar
+            </button>
+          </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Titulo</th>
+                    <th>Descripcion</th>
+                    <th>Publicado Por</th>
+                    <th>Me Gusta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.titulo}}</td>
+                    <td>{{data.descripcion}}</td>
+                    <td>{{data.nombre}} {{data.apellido}}</td>
+                    <td>{{data.cantidad}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<simple-notifications [options]="options"></simple-notifications>

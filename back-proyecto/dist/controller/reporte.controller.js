@@ -107,11 +107,12 @@ var ReporteController = /** @class */ (function () {
             });
         };
         this.getReporte6 = function (req, res) {
-            var query = "\n            SELECT Usuario.nombre,Usuario.apellido, titulo, descripcion, imagen, video FROM fase2.publicacion\n            INNER JOIN Usuario ON publicacion.idUsuario = Usuario.idUsuario\n            WHERE Usuario.idUsuario = ?\n        ";
+            var query = "\n            SELECT COUNT(*) as cantidad, Publicacion.titulo, Publicacion.descripcion, Publicacion.imagen, Publicacion.video, Publicacion.idPublicacion,\n            Usuario.nombre, Usuario.apellido FROM fase2.megusta\n            INNER JOIN Publicacion ON megusta.idPublicacion = publicacion.idPublicacion\n            INNER JOIN Usuario ON Publicacion.idUsuario = Usuario.idUsuario\n            WHERE Usuario.idUsuario = ?\n            UNION ALL\n            SELECT 0 as cantidad, titulo, descripcion, imagen, video, idPublicacion, Usuario.nombre, Usuario.apellido FROM fase2.publicacion\n            INNER JOIN Usuario ON publicacion.idUsuario = Usuario.idUsuario\n            WHERE Usuario.idUsuario = ?\n            GROUP BY idPublicacion;\n        ";
             var body = {
-                idUsuario: req.body.idUsuario
+                idUsuario: req.body.idUsuario,
+                idUsuario2: req.body.idUsuario,
             };
-            mysql_1.default.sendQuery(query, [body.idUsuario], function (err, data) {
+            mysql_1.default.sendQuery(query, [body.idUsuario, body.idUsuario2], function (err, data) {
                 if (err) {
                     res.status(400).json({
                         ok: false,

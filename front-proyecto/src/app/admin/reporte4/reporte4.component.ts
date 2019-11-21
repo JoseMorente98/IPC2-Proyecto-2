@@ -10,6 +10,8 @@ export class Reporte4Component implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
+  
 }
