@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Publicaciones</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let data of table |filter:search">
+    <img *ngIf="data.imagen" src="{{data.imagen}}">
+    <iframe *ngIf="data.video" width="100%" height="auto" [src]="data.video | sanitizer3"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <ion-card-header style="padding: 3%;">
+      <ion-card-title>{{data.titulo}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding: 3%;" (click)="goToRoute('estudiante/publi-d-estudiante/'+data.idPublicacion)">
+      {{data.descripcion}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>

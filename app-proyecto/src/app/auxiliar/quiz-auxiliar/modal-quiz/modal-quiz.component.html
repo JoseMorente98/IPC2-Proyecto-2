@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Evaluación</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="width: 100%; height: 250px;">
+    <div class="container">
+      <img class="img-center" src="https://aulavirtual.usac.edu.gt/g/logo.png">
+    </div>
+  </div>
+  <form padding (ngSubmit)="saveChanges()">
+    <ion-item>
+      <ion-label position="stacked"><ion-icon name="document"></ion-icon>  Tipo de Pregunta</ion-label>
+      <ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="data.tipoPregunta" name="tipoPregunta">
+        <ion-select-option value="Respuesta Multiple">Respuesta Multiple</ion-select-option>
+        <ion-select-option value="Falso/Verdadero">Falso/Verdadero</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Pregunta</ion-label>
+      <ion-input type="text" [(ngModel)]="data.pregunta" name="pregunta"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="data.tipoPregunta=='Respuesta Multiple'">
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Respuesta No. 1</ion-label>
+      <ion-input type="text" [(ngModel)]="data.respuesta1" name="respuesta1"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="data.tipoPregunta=='Respuesta Multiple'">
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Respuesta No. 2</ion-label>
+      <ion-input type="text" [(ngModel)]="data.respuesta2" name="respuesta2"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="data.tipoPregunta=='Respuesta Multiple'">
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Respuesta No. 3</ion-label>
+      <ion-input type="text" [(ngModel)]="data.respuesta3" name="respuesta3"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="data.tipoPregunta=='Respuesta Multiple'">
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Respuesta Correcta</ion-label>
+      <ion-input type="text" [(ngModel)]="data.correcta" name="correcta"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="data.tipoPregunta=='Falso/Verdadero'">
+      <ion-label position="stacked"><ion-icon name="document"></ion-icon>  Aleatorio</ion-label>
+      <ion-select value="brown" okText="Okay" cancelText="Dismiss" [(ngModel)]="data.correcta" name="correcta">
+        <ion-select-option value="Falso">Falso</ion-select-option>
+        <ion-select-option value="Verdadero">Verdadero</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Ponderación</ion-label>
+      <ion-input type="number" [(ngModel)]="data.punteo" name="punteo"></ion-input>
+    </ion-item>
+    <ion-button color="primary" expand="block" fill="outline" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Guardar Cambios
+    </ion-button>
+  </form>
+</ion-content>

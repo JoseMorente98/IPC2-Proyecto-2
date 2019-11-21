@@ -39,6 +39,15 @@ export class AsignacionEstudianteService {
     );
   }
 
+    //GET SINGLE
+    getStudentByCurso(id:number) : Observable<any> {
+      let url = `${this.basePath}asignacion-estudiante/estudiantes/${id}`;
+      return this.http.get(url)
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
+
   //GET SINGLE
   getSingle(id:number) : Observable<any> {
     let url = `${this.basePath}asignacion-estudiante/${id}`;

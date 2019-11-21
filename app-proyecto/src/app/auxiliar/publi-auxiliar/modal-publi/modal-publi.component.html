@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Publicacion</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div style="width: 100%; height: 250px;">
+    <div class="container">
+      <img class="img-center" src="https://aulavirtual.usac.edu.gt/g/logo.png">
+    </div>
+  </div>
+  <form padding (ngSubmit)="saveChanges()">
+    <ion-item >
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Titulo</ion-label>
+      <ion-input type="text" [(ngModel)]="data.titulo" name="titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"><ion-icon name="information-circle-outline"></ion-icon>  Descripcion</ion-label>
+      <ion-textarea rows="6" cols="20" [(ngModel)]="data.descripcion" maxlength="250" name="descripcion" placeholder="Ingresa tu mensaje de ticket..."></ion-textarea>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating"><ion-icon name="link"></ion-icon>  Imagen</ion-label>
+      <ion-input type="text" [(ngModel)]="data.imagen" name="imagen"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-label position="floating"><ion-icon name="link"></ion-icon>  Video</ion-label>
+      <ion-input type="text" [(ngModel)]="data.video" name="video"></ion-input>
+    </ion-item>
+    <ion-button color="primary" expand="block" fill="outline" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Guardar Cambios
+    </ion-button>
+  </form>
+</ion-content>

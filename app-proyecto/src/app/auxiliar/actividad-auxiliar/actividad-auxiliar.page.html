@@ -23,10 +23,16 @@
         <ion-card-subtitle>Punteo: {{data.ponderacion}}</ion-card-subtitle>
       </ion-card-header>
       <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
-          <ion-fab-button color="secondary" (click)="goToRoute('estudiante/actividad-d-estudiante/'+data.idActividad)">
+          <ion-fab-button color="secondary" (click)="goToRoute('auxiliar/entregada-auxiliar/'+data.idActividad)">
             <ion-icon name="document"></ion-icon>
           </ion-fab-button>
       </ion-fab>
     </ion-card>
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

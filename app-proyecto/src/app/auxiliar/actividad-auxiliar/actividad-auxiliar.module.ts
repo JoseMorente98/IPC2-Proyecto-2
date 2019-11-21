@@ -8,6 +8,7 @@ import { ActividadAuxiliarPageRoutingModule } from './actividad-auxiliar-routing
 
 import { ActividadAuxiliarPage } from './actividad-auxiliar.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ModalActividadComponent } from './modal-actividad/modal-actividad.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
     ActividadAuxiliarPageRoutingModule
   ],
-  declarations: [ActividadAuxiliarPage]
+  declarations: [
+    ActividadAuxiliarPage,
+    ModalActividadComponent
+  ], entryComponents: [
+    ModalActividadComponent
+  ]
 })
 export class ActividadAuxiliarPageModule {}

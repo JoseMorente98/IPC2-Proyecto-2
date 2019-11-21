@@ -1,0 +1,109 @@
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Reporte 1</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+        <form>
+            <div class="row">
+              <div class="col">
+                <label for="inputState">Curso</label>
+                <select id="inputState" class="form-control" [(ngModel)]="data.idCurso" name="idCurso">
+                  <option value="">Seleccionar Curso</option>
+                  <option *ngFor="let x of cursos" value="{{x.idCurso}}">{{x.nombre}}</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="inputState">Semestre</label>
+                <select id="inputState" class="form-control" [(ngModel)]="data.semestre" name="semestre">
+                  <option value="">Seleccionar Semestre</option>
+                  <option value="Semestre I">Semestre I</option>
+                  <option value="Semestre II">Semestre II</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="inputState">Año</label>
+                <select id="inputState" class="form-control" [(ngModel)]="data.anio" name="anio">
+                  <option value="">Seleccionar Año</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="inputState">Seccion</label>
+                <select id="inputState" class="form-control" [(ngModel)]="data.idSeccion" name="idSeccion">
+                  <option value="">Seleccionar Sección</option>
+                  <option *ngFor="let x of secciones" value="{{x.idSeccion}}">{{x.nombre}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="inputZip">Hora Inicio</label >
+                <input type="time" class="form-control" id="inputZip" [(ngModel)]="data.horaInicio" name="horaInicio">
+              </div>
+              <div class="col">
+                <label for="inputZip">Hora Fin</label >
+                <input type="time" class="form-control" id="inputZip" [(ngModel)]="data.horaFin" name="horaFin">
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline-primary" (click)="consultar()">
+              <span class="icon-holder">
+                <i class="ti-plus"></i>
+              </span>  Filtrar
+            </button>
+          </form>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Carnet</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                    <th>Semestre</th>
+                    <th>Año</th>
+                    <th>Curso</th>
+                    <th>Seccion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.carnet}}</td>
+                    <td>{{data.apellido}}</td>
+                    <td>{{data.nombre}}</td>
+                    <td>{{data.Semestre}}</td>
+                    <td>{{data.Anio}}</td>
+                    <td>{{data.curso}}</td>
+                    <td>{{data.seccion}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<simple-notifications [options]="options"></simple-notifications>

@@ -35,6 +35,24 @@ var AsignacionEstudianteController = /** @class */ (function () {
                 }
             });
         };
+        this.getStudentByCurso = function (req, res) {
+            var query = "\n            SELECT Usuario.nombre, Usuario.apellido, Usuario.idUsuario FROM fase2.asignacionestudiante\n            INNER JOIN Usuario ON asignacionestudiante.idUsuario = Usuario.idUsuario\n            WHERE idDetalleCurso = ?;\n        ";
+            var body = {
+                idDetalleCurso: req.params.id
+            };
+            mysql_1.default.sendQuery(query, body.idDetalleCurso, function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json(data);
+                }
+            });
+        };
         this.getCursosByStudent = function (req, res) {
             var query = "\n            SELECT idAsignacionEstudiante, DetalleCurso.semestre, DetalleCurso.idDetalleCurso, DetalleCurso.anio, DetalleCurso.horaInicio, DetalleCurso.horaFin, \n            Curso.nombre as 'curso', Curso.codigo, seccion.nombre as 'seccion' FROM AsignacionEstudiante\n            INNER JOIN DetalleCurso ON AsignacionEstudiante.idDetalleCurso = DetalleCurso.idDetalleCurso\n            INNER JOIN Curso on DetalleCurso.idCurso = Curso.idCurso\n            INNER JOIN Seccion on DetalleCurso.idSeccion = Seccion.idSeccion\n            WHERE AsignacionEstudiante.idUsuario = ?;\n        ";
             var body = {

@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>asistencia-auxiliar</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let data of table |filter:search" (click)="goToRoute('auxiliar/asiste-auxiliar/'+data.idAsistencia+'/'+parameter)">
+    <img src="https://www.telemundo.com/sites/nbcutelemundo/files/images/gallery/2016/10/26/nino-exitoso-levantando-mano-10.jpg">
+    <ion-card-header>
+      <ion-card-title>{{data.fecha | date: 'mediumDate'}} </ion-card-title>
+    </ion-card-header>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
+        <ion-fab-button color="secondary">
+          <ion-icon name="chatboxes"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+  </ion-card>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="create()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -234,6 +234,87 @@ CREATE TABLE Pregunta(
     ON DELETE CASCADE
 );
 
+-- CREAR TABLA DE TICKET
+DROP TABLE IF EXISTS Asistencia;
+CREATE TABLE Asistencia(
+    idAsistencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	fecha DATE NOT NULL,
+    idDetalleCurso INT NOT NULL,
+	FOREIGN KEY (idDetalleCurso) REFERENCES DetalleCurso(idDetalleCurso)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+-- CREAR TABLA DE TICKET
+DROP TABLE IF EXISTS DetalleAsistencia;
+CREATE TABLE DetalleAsistencia(
+    idDetalleAsistencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	tipo VARCHAR(100) NULL,
+    idUsuario INT NOT NULL,
+    idDetalleCurso INT NOT NULL,
+	FOREIGN KEY (idDetalleCurso) REFERENCES DetalleCurso(idDetalleCurso)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+-- CREAR TABLA DE TICKET
+DROP TABLE IF EXISTS Publicacion;
+CREATE TABLE Publicacion(
+    idPublicacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	titulo VARCHAR(100) NOT NULL,
+	descripcion VARCHAR(255) NULL,
+	imagen VARCHAR(255) NULL,
+	video VARCHAR(255) NULL
+);
+
+-- CREAR TABLA DE TICKET
+DROP TABLE IF EXISTS MeGusta;
+CREATE TABLE MeGusta(
+    idMeGusta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	idUsuario INT NOT NULL,
+    idPublicacion INT NOT NULL,
+	FOREIGN KEY (idPublicacion) REFERENCES Publicacion(idPublicacion)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+-- CREAR TABLA DE TICKET
+DROP TABLE IF EXISTS Comentario;
+CREATE TABLE Comentario(
+    idComentario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	comentario VARCHAR(255) NULL,
+	idUsuario INT NOT NULL,
+    idPublicacion INT NOT NULL,
+	FOREIGN KEY (idPublicacion) REFERENCES Publicacion(idPublicacion)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE,
+	FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+	ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+-- SP VER CREAR USUARIO
+DELIMITER $$
+CREATE PROCEDURE SP_CreateMeGusta
+(IN _idUsuario INT, _idPublicacion INT)
+BEGIN
+	DECLARE _existe INT;
+	SET _existe = (SELECT COUNT(*) FROM MeGusta WHERE idUsuario = _idUsuario AND idPublicacion = _idPublicacion);
+	IF(_existe = 0) THEN
+		INSERT INTO MeGusta(idUsuario, idPublicacion) VALUES (_idUsuario, _idPublicacion);
+		SELECT _existe;
+	ELSE
+		SELECT _existe;
+	END IF;
+END;
+$$
+
 -- SP AGREGAR DETALLE USUARIO
 DELIMITER $$
 CREATE PROCEDURE SP_AsignarRol

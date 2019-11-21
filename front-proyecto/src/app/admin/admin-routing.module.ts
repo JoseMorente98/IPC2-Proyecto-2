@@ -9,6 +9,9 @@ import { CursoComponent } from './curso/curso.component';
 import { AsignacionCursoAdminComponent } from './asignacion-curso-admin/asignacion-curso-admin.component';
 import { DetailCursoAdminComponent } from './detail-curso-admin/detail-curso-admin.component';
 import { TicketAdminComponent } from './ticket-admin/ticket-admin.component';
+import { ConAsignacionComponent } from './con-asignacion/con-asignacion.component';
+import { Reporte2Component } from './reporte2/reporte2.component';
+import { Reporte6Component } from './reporte6/reporte6.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -21,6 +24,9 @@ const routes: Routes = [
     { path: 'ticket', component: TicketAdminComponent},
     { path: 'detalle-curso', component: AsignacionCursoAdminComponent},
     { path: 'detalle-curso/auxiliar/:id', component: DetailCursoAdminComponent},
+    { path: 'reporte1', component: ConAsignacionComponent},
+    { path: 'reporte2', component: Reporte2Component},
+    { path: 'reporte6', component: Reporte6Component},
     /*{ path: 'producto', component: ProductoAdminComponent, canActivate: [AuthGuard] },
     { path: 'proveedor', component: ProveedorAdminComponent, canActivate: [AuthGuard] },
     { path: 'usuario', component: UsuarioAdminComponent, canActivate: [AuthGuard] },

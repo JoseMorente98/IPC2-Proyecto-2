@@ -24,6 +24,10 @@ export class ModalForoAuxComponent implements OnInit {
     private navParams: NavParams
   ) { }
 
+  closeModal() {
+    this.modalController.dismiss();
+  }
+
   ngOnInit() {
     this.data.idDetalleCurso = this.navParams.get('idDetalleCurso');
     if(this.navParams.get('value')) {

@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SanitizerPipe } from './_pipe/sanitizer.pipe';
+import { Sanitizer2Pipe } from './_pipe/sanitizer2.pipe';
+import { Sanitizer3Pipe } from './_pipe/sanitizer3.pipe';
+import { Sanitizer4Pipe } from './_pipe/sanitizer4.pipe';
 
 @NgModule({
   declarations: [AppComponent],

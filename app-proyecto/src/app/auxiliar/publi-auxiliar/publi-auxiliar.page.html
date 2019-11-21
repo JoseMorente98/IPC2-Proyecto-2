@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Publicaciones</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let data of table |filter:search">
+    <img *ngIf="data.imagen" src="{{data.imagen}}">
+    <iframe *ngIf="data.video" width="100%" height="auto" [src]="data.video | sanitizer"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <ion-card-header style="padding: 3%;">
+      <ion-card-title>{{data.titulo}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding: 3%;">
+      {{data.descripcion}}
+      <div style="text-align: center;">
+      <ion-button fill="clear" color="danger" (click)="delete(data.idPublicacion)">
+        <ion-icon name="trasher" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="presentModal(data.idPublicacion)">
+        <ion-icon name="pencil-alt" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="danger" (click)="goToRoute('auxiliar/publi-d-aux/'+data.idPublicacion)">
+        <ion-icon name="list-ol" slot="icon-only"></ion-icon>
+      </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

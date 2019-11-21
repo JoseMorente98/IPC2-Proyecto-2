@@ -22,9 +22,15 @@
       <ion-card-subtitle>Punteo: {{data.punteo}}</ion-card-subtitle>
     </ion-card-header>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="ion-fab-youtube">
-        <ion-fab-button color="secondary" (click)="goEvaluacion(data.idEvaluacion, data.habilitar)">
+        <ion-fab-button color="secondary" (click)="presentActionSheet(2, data.idEvaluacion)">
           <ion-icon name="list-box"></ion-icon>
         </ion-fab-button>
     </ion-fab>
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentModal(1)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

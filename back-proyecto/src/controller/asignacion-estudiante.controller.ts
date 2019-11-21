@@ -54,6 +54,30 @@ export default class AsignacionEstudianteController {
         })
     }
 
+    getStudentByCurso = (req: Request, res: Response) => {
+        const query = `
+            SELECT Usuario.nombre, Usuario.apellido, Usuario.idUsuario FROM fase2.asignacionestudiante
+            INNER JOIN Usuario ON asignacionestudiante.idUsuario = Usuario.idUsuario
+            WHERE idDetalleCurso = ?;
+        `;
+
+        let body = {
+            idDetalleCurso : req.params.id
+        }
+
+        MySQL.sendQuery(query, body.idDetalleCurso, (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json(data)
+            }
+        })
+    }
+
     getCursosByStudent = (req: Request, res: Response) => {
         const query = `
             SELECT idAsignacionEstudiante, DetalleCurso.semestre, DetalleCurso.idDetalleCurso, DetalleCurso.anio, DetalleCurso.horaInicio, DetalleCurso.horaFin, 

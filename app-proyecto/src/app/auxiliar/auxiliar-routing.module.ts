@@ -28,6 +28,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'publi-auxiliar',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+            import('./publi-auxiliar/publi-auxiliar.module').then( m => m.PubliAuxiliarPageModule)
+          }
+        ]
+      },
       /*{
         path: 'promocion',
         children: [
@@ -84,6 +94,23 @@ const routes: Routes = [
   {
     path: 'mensaje-d-auxiliar/:id',
     loadChildren: () => import('./mensaje-d-auxiliar/mensaje-d-auxiliar.module').then( m => m.MensajeDAuxiliarPageModule)
+  },
+  {
+    path: 'entregada-auxiliar/:id',
+    loadChildren: () => import('./entregada-auxiliar/entregada-auxiliar.module').then( m => m.EntregadaAuxiliarPageModule)
+  },
+  {
+    path: 'quiz-auxiliar/:id',
+    loadChildren: () => import('./quiz-auxiliar/quiz-auxiliar.module').then( m => m.QuizAuxiliarPageModule)
+  },
+  {
+    //id = asistencia id2 = detallecurso
+    path: 'asiste-auxiliar/:id/:id2',
+    loadChildren: () => import('./asiste-auxiliar/asiste-auxiliar.module').then( m => m.AsisteAuxiliarPageModule)
+  },
+  {
+    path: 'publi-d-aux/:id',
+    loadChildren: () => import('./publi-d-aux/publi-d-aux.module').then( m => m.PubliDAuxPageModule)
   }
 ];
 

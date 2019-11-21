@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { NotificacionService } from 'src/app/_service/notificacion.service';
 import { EvaluacionService } from 'src/app/_service/evaluacion.service';
 import { RespuestaService } from 'src/app/_service/respuesta.service';
+import { ModalController, ActionSheetController } from '@ionic/angular';
+import { ModalEvaluacionComponent } from './modal-evaluacion/modal-evaluacion.component';
 
 @Component({
   selector: 'app-evaluacion-auxiliar',
@@ -22,7 +24,10 @@ export class EvaluacionAuxiliarPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private notificationsService: NotificacionService,
     private evaluacionService: EvaluacionService,
-    private respuestaService: RespuestaService
+    private respuestaService: RespuestaService,
+    private modalController: ModalController,
+    private actionSheetController: ActionSheetController
+
   ) { }
 
   goToRoute(route:string) {
@@ -75,6 +80,72 @@ export class EvaluacionAuxiliarPage implements OnInit {
     } else {
       this.getAllCalificacion();
     }
+  }
+
+  async presentModal(tipo:number, id?:number) {
+    const modal = await this.modalController.create({
+      component: ModalEvaluacionComponent,
+      componentProps: {
+        idDetalleCurso: this.activatedRoute.snapshot.paramMap.get('id'),
+        value: id,
+        tipo: tipo
+      }
+    });
+    modal.onDidDismiss().then((data) => {
+      //DATOS
+      if(data.data) {
+        this.getAll();
+      }
+    });
+    return await modal.present();
+  }
+
+  async presentActionSheet(tipo:number, id?:number) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Albums',
+      buttons: [{
+        text: 'Eliminar',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          console.log('Delete clicked');
+          this.delete(id);
+        }
+      }, {
+        text: 'Preguntas',
+        icon: 'help',
+        handler: () => {
+          console.log('Share clicked');
+          this.goToRoute('auxiliar/quiz-auxiliar/'+id)
+        }
+      }, {
+        text: 'Configuración',
+        icon: 'settings',
+        handler: () => {
+          console.log('Play clicked');
+          this.presentModal(tipo, id);
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  delete(id:any) {
+    this.evaluacionService.delete(id)
+    .subscribe((res) => {
+      this.getAll();
+      this.notificationsService.alertMessage('Exito :D', 'Evaluacion eliminada con éxito.');
+    }, (error) => {
+      console.log(error);
+      this.notificationsService.alertMessage('Error D:', 'Ha ocurrido un error intente más tarde.');
+    })
   }
 
 }

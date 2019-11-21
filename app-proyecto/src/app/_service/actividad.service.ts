@@ -39,9 +39,17 @@ export class ActividadService {
     );
   }
 
-  //GET SINGLE
+  //GET SINGLE/actividad/entregadas/
   getNotas(id:number) : Observable<any> {
     let url = `${this.basePath}notas/${id}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getEntregadas(id:number) : Observable<any> {
+    let url = `${this.basePath}actividad/entregadas/${id}`;
     return this.http.get(url)
     .pipe(
       catchError(this.handleError)
@@ -51,6 +59,15 @@ export class ActividadService {
   //GET SINGLE
   getSingle(id:number) : Observable<any> {
     let url = `${this.basePath}actividad/${id}`;
+    return this.http.get(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  //GET SINGLE
+  getSingleActividad(id:number) : Observable<any> {
+    let url = `${this.basePath}actividad/estudiante/${id}`;
     return this.http.get(url)
     .pipe(
       catchError(this.handleError)
@@ -87,6 +104,15 @@ export class ActividadService {
   //CREATE
   public update(data:any) : Observable<any> {
     let url = `${this.basePath}actividad/${data.id}`;
+    return this.http.put(url, data, this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  //CREATE
+  public calificar(data:any) : Observable<any> {
+    let url = `${this.basePath}calificar/${data.id}`;
     return this.http.put(url, data, this.httpOptions)
     .pipe(
       catchError(this.handleError)

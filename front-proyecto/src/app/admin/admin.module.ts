@@ -13,6 +13,13 @@ import { CursoComponent } from './curso/curso.component';
 import { AsignacionCursoAdminComponent } from './asignacion-curso-admin/asignacion-curso-admin.component';
 import { DetailCursoAdminComponent } from './detail-curso-admin/detail-curso-admin.component';
 import { TicketAdminComponent } from './ticket-admin/ticket-admin.component';
+import { ConAsignacionComponent } from './con-asignacion/con-asignacion.component';
+import { Reporte2Component } from './reporte2/reporte2.component';
+import { Reporte3Component } from './reporte3/reporte3.component';
+import { Reporte4Component } from './reporte4/reporte4.component';
+import { Reporte5Component } from './reporte5/reporte5.component';
+import { Reporte6Component } from './reporte6/reporte6.component';
+import { Reporte7Component } from './reporte7/reporte7.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,14 @@ import { TicketAdminComponent } from './ticket-admin/ticket-admin.component';
     CursoComponent,
     AsignacionCursoAdminComponent,
     DetailCursoAdminComponent,
-    TicketAdminComponent
+    TicketAdminComponent,
+    ConAsignacionComponent,
+    Reporte2Component,
+    Reporte3Component,
+    Reporte4Component,
+    Reporte5Component,
+    Reporte6Component,
+    Reporte7Component
   ],
   imports: [
     CommonModule,

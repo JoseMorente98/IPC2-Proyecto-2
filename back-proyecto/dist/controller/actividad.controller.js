@@ -35,6 +35,42 @@ var ActividadController = /** @class */ (function () {
                 }
             });
         };
+        this.getSingleActividad = function (req, res) {
+            var query = "\n            SELECT Usuario.idUsuario, Usuario.nombre, Usuario.apellido, idActividadAlumno, entregada, texto, NOTA \n            FROM fase2.actividadalumno\n            INNER JOIN Usuario ON actividadalumno.idUsuario = Usuario.idUsuario\n            WHERE idActividadAlumno = ?;\n        ";
+            var body = {
+                idCurso: req.params.id
+            };
+            mysql_1.default.sendQuery(query, body.idCurso, function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json(data[0]);
+                }
+            });
+        };
+        this.getActividadesEntregadas = function (req, res) {
+            var query = "\n            SELECT Usuario.idUsuario, Usuario.nombre, Usuario.apellido, idActividadAlumno, entregada, texto, NOTA \n            FROM fase2.actividadalumno\n            INNER JOIN Usuario ON actividadalumno.idUsuario = Usuario.idUsuario\n            WHERE idActividad = ?;\n        ";
+            var body = {
+                idActividad: req.params.id
+            };
+            mysql_1.default.sendQuery(query, body.idActividad, function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json(data);
+                }
+            });
+        };
         this.getAllByAsignacion = function (req, res) {
             var query = "\n            SELECT * FROM Actividad WHERE idDetalleCurso = ?\n        ";
             var body = {
@@ -151,6 +187,28 @@ var ActividadController = /** @class */ (function () {
                 idActividad: req.params.id
             };
             mysql_1.default.sendQuery(query, [body.idDetalleCurso, body.nombre, body.fechaLimite, body.ponderacion, body.estado, body.idActividad], function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json({
+                        ok: true,
+                        status: 200
+                    });
+                }
+            });
+        };
+        this.calificar = function (req, res) {
+            var query = "\n            UPDATE ActividadAlumno SET entregada = 2, NOTA = ? WHERE idActividadAlumno = ?;\n        ";
+            var body = {
+                nota: req.body.nota,
+                idActividadAlumno: req.params.id
+            };
+            mysql_1.default.sendQuery(query, [body.nota, body.idActividadAlumno], function (err, data) {
                 if (err) {
                     res.status(400).json({
                         ok: false,

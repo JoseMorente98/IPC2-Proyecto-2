@@ -15,6 +15,9 @@ import actividad from "./router/actividad.router";
 import evaluacion from "./router/evaluacion.router";
 import pregunta from "./router/pregunta.router";
 import respuesta from "./router/respuesta.router";
+import asistencia from "./router/asistencia.router";
+import publicacion from "./router/publicacion.router";
+import reporte from "./router/reporte.router";
 
 const server = Server.init(3000);
 const api:string = "/api/"
@@ -58,6 +61,9 @@ server.app.use(api, ticket);
 server.app.use(api, evaluacion);
 server.app.use(api, pregunta);
 server.app.use(api, respuesta);
+server.app.use(api, asistencia);
+server.app.use(api, publicacion);
+server.app.use(api, reporte);
 
 server.start(()=> {
   console.log("Servidor corriendo en el puerto 3000 :D")

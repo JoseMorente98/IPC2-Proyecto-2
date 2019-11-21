@@ -38,6 +38,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'publi-estudiante',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('./publi-estudiante/publi-estudiante.module').then( m => m.PubliEstudiantePageModule)
+          }
+        ]
+      },
       /*{
         path: 'promocion',
         children: [
@@ -111,6 +121,10 @@ const routes: Routes = [
   {
     path: 'actividad-d-estudiante/:id',
     loadChildren: () => import('./actividad-d-estudiante/actividad-d-estudiante.module').then( m => m.ActividadDEstudiantePageModule)
+  },
+  {
+    path: 'publi-d-estudiante/:id',
+    loadChildren: () => import('./publi-d-estudiante/publi-d-estudiante.module').then( m => m.PubliDEstudiantePageModule)
   },
 ];
 

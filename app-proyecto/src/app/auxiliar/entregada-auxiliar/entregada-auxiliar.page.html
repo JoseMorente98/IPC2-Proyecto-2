@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Actividades</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding  *ngFor="let data of table |filter:search">
+      <ion-item>
+        <ion-label>
+          <p><ion-icon name="person"></ion-icon><strong>Estudiante:</strong>  {{data.nombre}} {{data.apellido}}</p>
+          <p><ion-icon name="document"></ion-icon><strong>Nota:</strong>  {{data.NOTA}}</p>
+          <p *ngIf="data.entregada=='1'"><ion-icon name="checkmark-circle-outline"></ion-icon>Entregado</p>
+          <p *ngIf="data.entregada=='2'"><ion-icon name="checkmark-circle-outline"></ion-icon>Calificado</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="presentModal(data.idActividadAlumno)">Calificar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

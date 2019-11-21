@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goToBack()">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        <!--<p>Back</p>-->
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-segment (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="estudiante" checked>
+        <ion-label>Estudiantes</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="asistencia">
+        <ion-label>Asistencia</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="this.selectItem == 'estudiante'">
+  <ion-list>
+      <!-- Sliding item with text options on both sides -->
+    <ion-item-sliding *ngFor="let item of table">
+      <ion-item>
+        <img class="img-noticia" src="https://www.3frutti.it/images/staff/person-flat.png" slot="start">
+        <ion-label>
+          <strong>{{item.nombre}} {{item.apellido}}</strong>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="success" (click)="createAsistencia(item.idUsuario, 'Presente')">
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          Presente
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="createAsistencia(item.idUsuario, 'Ausente')">
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          Ausente
+        </ion-item-option>
+        <ion-item-option color="warning" (click)="createAsistencia(item.idUsuario, 'Llego Tarde')">
+          <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+          Llego Tarde
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-content *ngIf="this.selectItem == 'asistencia'">
+  <ion-list>
+      <!-- Sliding item with text options on both sides -->
+    <ion-item-sliding *ngFor="let item of estudiante">
+      <ion-item>
+        <img class="img-noticia" src="https://www.3frutti.it/images/staff/person-flat.png" slot="start">
+        <ion-label>
+          <p><strong><ion-icon name="person"></ion-icon>  {{item.nombre}} {{item.apellido}}</strong></p>
+          <p><strong><ion-icon name="checkmark-circle-outline"></ion-icon>  {{item.tipo}}</strong></p>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+

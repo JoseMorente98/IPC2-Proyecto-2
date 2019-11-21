@@ -47,6 +47,56 @@ export default class ActividadController {
         })
     }
 
+    getSingleActividad = (req: Request, res: Response) => {
+        const query = `
+            SELECT Usuario.idUsuario, Usuario.nombre, Usuario.apellido, idActividadAlumno, entregada, texto, NOTA 
+            FROM fase2.actividadalumno
+            INNER JOIN Usuario ON actividadalumno.idUsuario = Usuario.idUsuario
+            WHERE idActividadAlumno = ?;
+        `;
+
+        let body = {
+            idCurso : req.params.id
+        }
+
+        MySQL.sendQuery(query, body.idCurso, (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json(data[0])
+            }
+        })
+    }
+
+    getActividadesEntregadas = (req: Request, res: Response) => {
+        const query = `
+            SELECT Usuario.idUsuario, Usuario.nombre, Usuario.apellido, idActividadAlumno, entregada, texto, NOTA 
+            FROM fase2.actividadalumno
+            INNER JOIN Usuario ON actividadalumno.idUsuario = Usuario.idUsuario
+            WHERE idActividad = ?;
+        `;
+
+        let body = {
+            idActividad : req.params.id
+        }
+
+        MySQL.sendQuery(query, body.idActividad, (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json(data)
+            }
+        })
+    }
+
     getAllByAsignacion = (req: Request, res: Response) => {
         const query = `
             SELECT * FROM Actividad WHERE idDetalleCurso = ?
@@ -195,6 +245,34 @@ export default class ActividadController {
     
         MySQL.sendQuery(query, 
             [body.idDetalleCurso, body.nombre, body.fechaLimite, body.ponderacion, body.estado, body.idActividad],
+            (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json({
+                    ok: true,
+                    status: 200
+                })
+            }
+        })
+    }
+
+    calificar = (req: Request, res: Response) => {
+        const query = `
+            UPDATE ActividadAlumno SET entregada = 2, NOTA = ? WHERE idActividadAlumno = ?;
+        `;
+
+        let body = {
+            nota: req.body.nota,
+            idActividadAlumno: req.params.id
+        }
+    
+        MySQL.sendQuery(query, 
+            [body.nota, body.idActividadAlumno],
             (err:any, data:Object[]) => {
             if(err) {
                 res.status(400).json({
