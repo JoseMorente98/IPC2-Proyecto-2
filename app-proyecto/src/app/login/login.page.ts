@@ -61,6 +61,7 @@ export class LoginPage implements OnInit {
         localStorage.setItem("currentId", res[0].idUsuario);      
         localStorage.setItem("currentNombre", res[0].nombre);         
         localStorage.setItem("currentApellido", res[0].apellido);         
+        localStorage.setItem("currentEstado", res[0].estado);         
 
         switch(res[0].idTipoUsuario) {
           case 1:
@@ -70,7 +71,7 @@ export class LoginPage implements OnInit {
           case 2:
             if(res.length > 1) {
               //DASHBOARD COMPARTIDO
-              this.router.navigate(['intermedio']);
+              this.router.navigate(['auxiliar']);
             } else {
               //AUX
               this.router.navigate(['auxiliar']);

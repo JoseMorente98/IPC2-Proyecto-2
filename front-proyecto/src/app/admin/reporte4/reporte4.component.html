@@ -1,0 +1,50 @@
+<main class='main-content bgc-grey-100'>
+  <div id='mainContent'>
+    <div class="container-fluid">
+      <div class="jumbotron">
+        <h1 class="display-4">Reporte 4</h1>
+        <div class="form-group form-inline my-2 my-lg-0">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">
+                  <span class="icon-holder">
+                    <i class="ti-search"></i>
+                  </span>
+                </div>
+              </div>
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Buscar" [(ngModel)]="search" name="search">
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="bgc-white bd bdrs-3 p-20 mB-20">
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Punteo</th>
+                    <th>Habilitar</th>
+                    <th>Aleatorio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.nombre}}</td>
+                    <td>{{data.punteo}}</td>
+                    <td *ngIf="data.habilitar=='0'">No Habilitado</td>
+                    <td *ngIf="data.habilitar=='1'">Habilitado</td>
+                    <td *ngIf="data.aleatorio=='0'">No Aleatorio</td>
+                    <td *ngIf="data.aleatorio=='1'">Aleatorio</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<simple-notifications [options]="options"></simple-notifications>

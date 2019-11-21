@@ -3,6 +3,8 @@ import { AsignacionAuxiliarService } from 'src/app/_service/asignacion-auxiliar.
 import { Router } from '@angular/router';
 import { NotificacionService } from 'src/app/_service/notificacion.service';
 import { Location } from '@angular/common';
+import { ModalController } from '@ionic/angular';
+import { ModalRecoveryComponent } from 'src/app/login/modal-recovery/modal-recovery.component';
 
 @Component({
   selector: 'app-curso-auxiliar',
@@ -16,11 +18,16 @@ export class CursoAuxiliarPage implements OnInit {
     private asignacionAuxiliarService: AsignacionAuxiliarService,
     private router: Router,
     private notificacionService: NotificacionService,
-    private location: Location
+    private location: Location,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
+    if(localStorage.getItem('currentEstado')=='1') {
+      this.presentModal();
+    }
     this.getAll()
+    
   }
 
   getAll() {
@@ -48,6 +55,16 @@ export class CursoAuxiliarPage implements OnInit {
 
   goToBack() {
     this.location.back();
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalRecoveryComponent
+    });
+    modal.onDidDismiss().then((data) => {
+      //DATOS
+    });
+    return await modal.present();
   }
 
 }

@@ -8,6 +8,7 @@ import { CursoEstudiantePageRoutingModule } from './curso-estudiante-routing.mod
 
 import { CursoEstudiantePage } from './curso-estudiante.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ModalRecoveryComponent } from 'src/app/login/modal-recovery/modal-recovery.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,11 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
     CursoEstudiantePageRoutingModule
   ],
-  declarations: [CursoEstudiantePage]
+  declarations: [
+    CursoEstudiantePage,
+    ModalRecoveryComponent
+  ], entryComponents: [
+    ModalRecoveryComponent
+  ]
 })
 export class CursoEstudiantePageModule {}

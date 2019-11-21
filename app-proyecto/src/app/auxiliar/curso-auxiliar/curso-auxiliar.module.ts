@@ -8,6 +8,7 @@ import { CursoAuxiliarPageRoutingModule } from './curso-auxiliar-routing.module'
 
 import { CursoAuxiliarPage } from './curso-auxiliar.page';
 import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ModalRecoveryComponent } from 'src/app/login/modal-recovery/modal-recovery.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,11 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
     Ng2SearchPipeModule,
     CursoAuxiliarPageRoutingModule
   ],
-  declarations: [CursoAuxiliarPage]
+  declarations: [
+    CursoAuxiliarPage,
+    ModalRecoveryComponent
+  ], entryComponents: [
+    ModalRecoveryComponent
+  ]
 })
 export class CursoAuxiliarPageModule {}

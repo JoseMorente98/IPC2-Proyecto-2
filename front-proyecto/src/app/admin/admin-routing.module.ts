@@ -14,6 +14,7 @@ import { Reporte2Component } from './reporte2/reporte2.component';
 import { Reporte6Component } from './reporte6/reporte6.component';
 import { Reporte3Component } from './reporte3/reporte3.component';
 import { Reporte5Component } from './reporte5/reporte5.component';
+import { Reporte4Component } from './reporte4/reporte4.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: 'reporte1', component: ConAsignacionComponent},
     { path: 'reporte2', component: Reporte2Component},
     { path: 'reporte3', component: Reporte3Component},
+    { path: 'reporte4', component: Reporte4Component},
     { path: 'reporte5', component: Reporte5Component},
     { path: 'reporte6', component: Reporte6Component},
     /*{ path: 'producto', component: ProductoAdminComponent, canActivate: [AuthGuard] },

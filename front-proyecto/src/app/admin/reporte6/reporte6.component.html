@@ -75,6 +75,30 @@
         <div class="col-md-12">
           <div class="bgc-white bd bdrs-3 p-20 mB-20">
             <canvas #barCanvas></canvas>
+
+            <!--TABLA-->
+            <table id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Semestre</th>
+                    <th>Año</th>
+                    <th>Curso</th>
+                    <th>Seccion</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of table |filter:search">
+                    <td>{{data.Semestre}}</td>
+                    <td>{{data.Anio}}</td>
+                    <td>{{data.curso}}</td>
+                    <td>{{data.seccion}}</td>
+                    <td>{{data.tipo}}</td>
+                    <td>{{data.cantidad}}</td>
+                  </tr>
+                </tbody>
+              </table>
           </div>
         </div>
       </div>

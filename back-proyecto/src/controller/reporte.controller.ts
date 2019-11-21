@@ -193,7 +193,7 @@ export default class ReporteController {
     getReporte7 = (req: Request, res: Response) => {
         const query = `
             SELECT COUNT(*) as cantidad, tipo, DetalleCurso.Semestre, DetalleCurso.Anio, Asistencia.idAsistencia,
-            DetalleCurso.horaInicio,DetalleCurso.horaFin, Curso.nombre, Seccion.nombre FROM fase2.detalleasistencia
+            DetalleCurso.horaInicio,DetalleCurso.horaFin, Curso.nombre as curso, Seccion.nombre as seccion FROM fase2.detalleasistencia
             INNER JOIN Asistencia ON detalleasistencia.idAsistencia = asistencia.idAsistencia
             INNER JOIN DetalleCurso ON asistencia.idDetalleCurso = DetalleCurso.idDetalleCurso
             INNER JOIN Curso ON DetalleCurso.idCurso = Curso.idCurso

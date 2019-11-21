@@ -3,6 +3,8 @@ import { AsignacionEstudianteService } from 'src/app/_service/asignacion-estudia
 import { CursoDetalleService } from 'src/app/_service/curso-detalle.service';
 import { NotificacionService } from 'src/app/_service/notificacion.service';
 import { Router } from '@angular/router';
+import { ModalRecoveryComponent } from 'src/app/login/modal-recovery/modal-recovery.component';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-curso-estudiante',
@@ -17,10 +19,14 @@ export class CursoEstudiantePage implements OnInit {
     private asignacionStudentService: AsignacionEstudianteService,
     private cursoDetalleService: CursoDetalleService,
     private router: Router,
-    private notificationsService: NotificacionService
+    private notificationsService: NotificacionService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
+    if(localStorage.getItem('currentEstado')=='1') {
+      this.presentModal();
+    }
     this.getAll()
   }
   goToRoute(route:string) {
@@ -63,5 +69,18 @@ export class CursoEstudiantePage implements OnInit {
     }
     this.create(data);
   }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: ModalRecoveryComponent,
+      componentProps: {
+      }
+    });
+    modal.onDidDismiss().then((data) => {
+      //DATOS
+    });
+    return await modal.present();
+  }
+  
 
 }

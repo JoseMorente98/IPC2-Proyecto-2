@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="navParams.get('value') == '1'">
+  <div style="width: 100%; height: 250px;">
+    <div class="container">
+      <img class="img-center" src="https://aulavirtual.usac.edu.gt/g/logo.png">
+    </div>
+  </div>
+  <form padding (ngSubmit)="saveChanges()" class="item item-trns">
+    <ion-item color="transparent">
+      <ion-label style="color: white;"  position="floating"><ion-icon name="person"></ion-icon>  Contraseña</ion-label>
+      <ion-input style="color: white;" type="password" [(ngModel)]="data.password" name="password"></ion-input>
+    </ion-item>
+    <ion-item color="transparent">
+      <ion-label style="color: white;"  position="floating"><ion-icon name="person"></ion-icon>  Confirmar Contraseña</ion-label>
+      <ion-input style="color: white;" type="password" [(ngModel)]="data.passwordRepeat" name="passwordRepeat"></ion-input>
+    </ion-item>
+    <ion-button color="light" expand="block" fill="outline" type="submit" [disabled]="disabledBtn">
+      <ion-icon name="save" slot="start"></ion-icon>
+      Guardar Cambios
+    </ion-button>
+  </form>
+</ion-content>
