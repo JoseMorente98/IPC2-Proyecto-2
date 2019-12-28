@@ -1,5 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    <ion-button (click)="goToRoute('login')">
+      <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      <!--<p>Back</p>-->
+    </ion-button>
+    </ion-buttons>
     <ion-title>Mis Cursos</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="goToRoute('auxiliar/mensaje-auxiliar')">

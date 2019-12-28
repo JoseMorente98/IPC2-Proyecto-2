@@ -24,11 +24,19 @@ export class CursoEstudiantePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAll()
+  }
+
+  clearLocal() {
+    localStorage.clear();
+  }
+
+  ionViewDidEnter() {
     if(localStorage.getItem('currentEstado')=='1') {
       this.presentModal();
     }
-    this.getAll()
   }
+
   goToRoute(route:string) {
     this.router.navigate([`${route}`])
   }

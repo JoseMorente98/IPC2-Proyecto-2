@@ -143,6 +143,28 @@ var UsuarioController = /** @class */ (function () {
                 }
             });
         };
+        this.updatePassword = function (req, res) {
+            var data = {
+                id: req.params.id,
+                password: req.body.password,
+            };
+            var query = "\n            UPDATE Usuario SET password = ?, estado = 0\n                WHERE idUsuario = ?;\n        ";
+            mysql_1.default.sendQuery(query, [data.password, data.id], function (err, data) {
+                if (err) {
+                    res.status(400).json({
+                        ok: false,
+                        status: 400,
+                        error: err
+                    });
+                }
+                else {
+                    res.json({
+                        ok: true,
+                        status: 200
+                    });
+                }
+            });
+        };
         this.delete = function (req, res) {
             var id = req.params.id;
             var query = "\n            DELETE FROM Usuario WHERE idUsuario = ?;\n        ";

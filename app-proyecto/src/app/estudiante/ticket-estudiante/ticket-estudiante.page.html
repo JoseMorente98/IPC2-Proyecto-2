@@ -22,7 +22,8 @@
       <ion-card-subtitle *ngIf="data.estado==2">En Proceso</ion-card-subtitle>
       <ion-card-subtitle *ngIf="data.estado==3">Finalizado</ion-card-subtitle>
       <ion-card-content>
-        {{data.mensaje}}
+        <p>{{data.mensaje}}</p>
+        <p>{{data.respuesta}}</p>
       </ion-card-content>
       <div style="text-align: center;">
       <ion-button fill="clear" color="danger" (click)="delete(data.idTicket)">

@@ -4,6 +4,7 @@ const usuario = Router();
 
 usuario.post('/auth', UsuarioController.getInstance().auth);
 usuario.post('/recovery', UsuarioController.getInstance().recoveryPassword);
+usuario.put('/resetpassword/:id', UsuarioController.getInstance().updatePassword);
 usuario.get('/usuario', UsuarioController.getInstance().getAll);
 usuario.get('/usuario/admin', UsuarioController.getInstance().getAllAdmin);
 usuario.get('/usuario/auxiliar', UsuarioController.getInstance().getAllAuxiliar);

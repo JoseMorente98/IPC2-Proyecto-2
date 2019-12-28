@@ -5,6 +5,7 @@ import { NotificacionService } from 'src/app/_service/notificacion.service';
 import { Location } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { ModalRecoveryComponent } from 'src/app/login/modal-recovery/modal-recovery.component';
+import { ModalRecovery2Component } from 'src/app/login/modal-recovery2/modal-recovery2.component';
 
 @Component({
   selector: 'app-curso-auxiliar',
@@ -23,11 +24,14 @@ export class CursoAuxiliarPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAll()
+    
+  }
+
+  ionViewDidEnter() {
     if(localStorage.getItem('currentEstado')=='1') {
       this.presentModal();
     }
-    this.getAll()
-    
   }
 
   getAll() {
@@ -59,7 +63,7 @@ export class CursoAuxiliarPage implements OnInit {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: ModalRecoveryComponent
+      component: ModalRecovery2Component
     });
     modal.onDidDismiss().then((data) => {
       //DATOS

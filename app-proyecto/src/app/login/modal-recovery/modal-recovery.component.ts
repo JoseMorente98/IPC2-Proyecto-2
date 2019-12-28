@@ -55,6 +55,7 @@ export class ModalRecoveryComponent implements OnInit {
       if(this.data.passwordRepeat) {
         if(this.data.password == this.data.passwordRepeat) {
           //actualiza
+          this.create(this.data)
         } else {
           this.notificationsService.alertToast('Las contraseñas no son iguales')
         }
@@ -67,19 +68,16 @@ export class ModalRecoveryComponent implements OnInit {
   }
 
   create(data:any) {
-    this.usuarioService.create(data)
+    this.usuarioService.changePassword(data)
     .subscribe((res) => {
       console.log(res)
-      if(res.status==200) {
-        this.notificationsService.alertMessage('Exito :D', 'Usuario registrado exitosamente.');
-        setTimeout(() => {
+      //if(res.status==200) {
+        this.notificationsService.alertMessage('Exito :D', 'Contraseña cambiada exitosamente.');
+        //setTimeout(() => {
           //INICIAR SESION
           //this.router.navigate(['/login'])
+          localStorage.setItem('currentEstado', '0')
           this.modalController.dismiss();
-        }, 1000);
-      } else {
-        this.notificationsService.alertMessage('Error D:', 'Ha ocurrido un error intente más tarde.');        
-      }
       this.disabledBtn = false;
     }, error => {
       this.disabledBtn = false;

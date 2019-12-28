@@ -113,8 +113,8 @@ export class UsuarioService {
 
   //CHANGE PASSWORD
   public changePassword(data:any) : Observable<any> {
-    let url = `${this.basePath}usuario/${data.id}/changepassword`;
-    return this.http.post(url, data, this.httpOptions)
+    let url = `${this.basePath}resetpassword/${data.id}`;
+    return this.http.put(url, data, this.httpOptions)
     .pipe(
       catchError(this.handleError)
     )

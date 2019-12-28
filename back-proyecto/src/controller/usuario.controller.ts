@@ -202,6 +202,35 @@ export default class UsuarioController {
         })
     }
 
+    updatePassword = (req: Request, res: Response) => {
+        let data = {
+            id: req.params.id,
+            password: req.body.password,
+        }
+    
+        const query = `
+            UPDATE Usuario SET password = ?, estado = 0
+                WHERE idUsuario = ?;
+        `;
+    
+        MySQL.sendQuery(query, 
+            [data.password, data.id],
+            (err:any, data:Object[]) => {
+            if(err) {
+                res.status(400).json({
+                    ok: false,
+                    status: 400,
+                    error: err
+                });
+            } else {
+                res.json({
+                    ok: true,
+                    status: 200
+                })
+            }
+        })
+    }
+
     delete = (req: Request, res: Response) => {
         const id = req.params.id;
 
